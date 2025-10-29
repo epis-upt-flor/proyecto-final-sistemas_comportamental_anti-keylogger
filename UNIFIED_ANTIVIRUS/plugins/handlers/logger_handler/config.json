@@ -1,0 +1,38 @@
+{
+  "loggers": {
+    "main": {
+      "file": "logs/antivirus.log",
+      "level": "INFO",
+      "max_size": "10MB",
+      "backup_count": 5,
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    "threats": {
+      "file": "logs/threats.log",
+      "level": "WARNING",
+      "max_size": "50MB",
+      "backup_count": 10,
+      "format": "%(asctime)s - THREAT - %(levelname)s - %(message)s"
+    },
+    "performance": {
+      "file": "logs/performance.log",
+      "level": "INFO",
+      "max_size": "20MB",
+      "backup_count": 3,
+      "format": "%(asctime)s - PERF - %(message)s"
+    },
+    "audit": {
+      "file": "logs/audit.log",
+      "level": "INFO",
+      "max_size": "100MB",
+      "backup_count": 20,
+      "format": "%(asctime)s - AUDIT - %(message)s"
+    }
+  },
+  "buffer_enabled": true,
+  "buffer_size": 100,
+  "flush_interval": 5,
+  "compress_old_logs": true,
+  "json_logging": true,
+  "log_retention_days": 30
+}

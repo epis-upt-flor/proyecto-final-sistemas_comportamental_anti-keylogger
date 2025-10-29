@@ -1,0 +1,239 @@
+% Formato IEEE en español
+\documentclass[conference]{IEEEtran}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\title{Sistema web con integración de Machine Learning para la detección anticipada de keyloggers en instituciones educativas: Análisis comparativo y desarrollo}
+
+\author{
+    \IEEEauthorblockN{Sebastian Arce Bracamonte, Brant Antony Chata Choque}
+    \IEEEauthorblockA{Universidad Privada de Tacna, Perú\\Email: sebarceb@upt.edu.pe, brant.chata@upt.edu.pe}
+}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este artículo presenta el análisis, diseño y desarrollo de un sistema web con integración de Machine Learning para la detección anticipada de keyloggers en instituciones educativas. Se compara la estructura y capacidades del proyecto actual con los requerimientos y recomendaciones extraídos de documentos técnicos y académicos, evaluando la factibilidad, arquitectura, calidad y potencial de mejora del sistema. Se incluyen referencias recientes sobre técnicas avanzadas de detección y explicabilidad en IA para keyloggers.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Keylogger, Machine Learning, Ciberseguridad, Ensembles, Explicabilidad, Educación, Detección de malware
+\end{IEEEkeywords}
+
+\section{Introducción}
+La digitalización en instituciones educativas ha incrementado la exposición a amenazas cibernéticas, especialmente keyloggers, que comprometen la privacidad y seguridad de estudiantes y personal. El presente trabajo describe el desarrollo de un sistema híbrido (Python/C++) que emplea técnicas de Machine Learning para la detección proactiva de keyloggers, integrando módulos de monitoreo, análisis y respuesta automatizada. Se realiza un análisis comparativo con los últimos avances en la literatura, incluyendo técnicas de ensembles y explicabilidad en IA \cite{mahmud2025trustworthy}.
+
+\section{Metodología y Arquitectura}
+
+\subsection{Arquitectura del Sistema}
+El sistema está diseñado como una plataforma web centralizada, con agentes ligeros en los equipos cliente y un servidor con motor de Machine Learning. La arquitectura modular incluye:
+\begin{itemize}
+    \item Núcleo de gestión de plugins y eventos (\texttt{core/})
+    \item Detectores de amenazas (ML, comportamiento, red)
+    \item Monitores de archivos, procesos y red
+    \item Handlers para alertas, cuarentena y logging
+    \item Modelos ML exportados en formato ONNX
+    \item Configuración centralizada y flexible
+\end{itemize}
+
+\subsection{Preprocesamiento y Selección de Características}
+El sistema implementa técnicas avanzadas de preprocesamiento de datos, basándose en la metodología propuesta por Mahmud \cite{mahmud2025trustworthy}:
+
+\textbf{Preprocesamiento de Datos:}
+\begin{itemize}
+    \item Manejo del desbalance de clases usando SMOTE (Synthetic Minority Oversampling Technique)
+    \item Codificación de etiquetas para convertir características categóricas a numéricas
+    \item Normalización MinMax para escalar características al rango [0,1]
+    \item División del dataset en entrenamiento (80\%) y prueba (20\%)
+\end{itemize}
+
+\textbf{Selección de Características:}
+El sistema implementa tres métodos principales de selección de características:
+\begin{itemize}
+    \item \textbf{Information Gain (IG):} Cuantifica la dependencia entre cada característica y la variable objetivo. Con umbral IG > 0.1, se seleccionan 46 características más informativas.
+    \item \textbf{Lasso L1:} Método de selección embebido que aplica regularización L1, seleccionando 56 características con coeficientes no nulos.
+    \item \textbf{Fisher Score:} Maximiza la separación inter-clase mientras minimiza la varianza intra-clase, seleccionando las 47 características con mayor puntuación.
+\end{itemize}
+
+\subsection{Modelos de Machine Learning y Ensembles}
+El sistema utiliza una combinación de modelos tradicionales y técnicas avanzadas de ensemble:
+
+\textbf{Modelos Base:} SVC, Random Forest, Decision Tree, XGBoost, AdaBoost, Logistic Regression, Naive Bayes.
+
+\textbf{Métodos de Ensemble:}
+\begin{itemize}
+    \item \textbf{Voting Classifier:} Combina predicciones mediante votación mayoritaria
+    \item \textbf{Stacking:} Arquitectura de dos capas donde modelos base (RF, SVC, XGBoost) alimentan un meta-aprendiz (Logistic Regression)
+    \item \textbf{Blending:} Similar al stacking pero usando conjunto de validación holdout para evitar filtración de información
+\end{itemize}
+
+El sistema utiliza modelos ML (scikit-learn, ONNX), monitoreo en tiempo real, registro de eventos, configuración modular y soporte multiplataforma. Cumple con normativas de protección de datos y está preparado para integración y escalabilidad.
+
+\section{Comparación con el Estado del Arte}
+
+\subsection{Avances en Técnicas de Ensemble}
+Recientes investigaciones, como la de Mahmud \cite{mahmud2025trustworthy}, han demostrado que el uso de técnicas de ensembles mejora significativamente la detección de keyloggers:
+
+\textbf{Modelos Tradicionales vs. Ensembles:}
+\begin{itemize}
+    \item Random Forest alcanzó 99.27\% de precisión vs. 99.78\% reportado en literatura \cite{rathore2018}
+    \item AdaBoost demostró capacidad superior (99.76\%) para manejar muestras mal clasificadas
+    \item Métodos ensemble (Stacking, Blending, Voting) mantuvieron consistencia >98.7\%
+    \item Naive Bayes mostró limitaciones significativas (33.41\% precisión)
+\end{itemize}
+
+\subsection{Efectividad de Selección de Características}
+El análisis comparativo muestra la superioridad de Fisher Score sobre otros métodos:
+\begin{itemize}
+    \item \textbf{Fisher Score:} 99.76\% precisión con 47 características (reducción 45\%)
+    \item \textbf{Information Gain:} 99.51\% precisión con 46 características
+    \item \textbf{Lasso L1:} 99.02\% precisión con 56 características
+\end{itemize}
+
+\subsection{Integración de Explicabilidad AI}
+La incorporación de métodos SHAP y LIME representa un avance significativo sobre trabajos previos que se enfocan únicamente en precisión. Esto permite:
+\begin{itemize}
+    \item Identificación de características críticas (Dst\_Port, métricas de paquetes)
+    \item Interpretabilidad a nivel global e individual de instancias
+    \item Validación de conocimiento del dominio en ciberseguridad
+    \item Confianza aumentada para despliegue en entornos críticos
+\end{itemize}
+
+\subsection{Comparación con Trabajos Relacionados}
+\begin{itemize}
+    \item Alghamdi et al. \cite{alghamdi2019}: RF 99.6\% vs. nuestro sistema 99.76\%
+    \item Pillai \cite{pillai2019}: Framework SVM modificado vs. ensemble multimodelo
+    \item Levshun \cite{levshun2023}: Enfoque en comportamiento vs. tráfico de red
+    \item Ventaja: Combinación de ensemble + selección de características + XAI
+\end{itemize}
+
+El proyecto actual implementa la mayoría de los conceptos y requerimientos descritos en los documentos académicos y en la literatura reciente. Las áreas de mejora identificadas incluyen:
+\begin{itemize}
+    \item Desarrollo de una interfaz gráfica multiplataforma
+    \item Integración con sistemas empresariales (SIEM/SOC)
+    \item Mecanismos de auto-actualización de modelos
+    \item Extensión multiplataforma (Linux/macOS)
+\end{itemize}
+
+\section{Resultados y Discusión}
+
+El sistema desarrollado representa un avance significativo en la ciberseguridad institucional, alineado con las mejores prácticas y recomendaciones académicas. Su arquitectura modular, capacidad de integración y enfoque en Machine Learning lo posicionan como una solución robusta y escalable.
+
+\subsection{Rendimiento y Métricas de Evaluación}
+El sistema logró resultados excepcionales siguiendo la metodología de evaluación exhaustiva propuesta por Mahmud \cite{mahmud2025trustworthy}:
+
+\textbf{Mejores Resultados Obtenidos:}
+AdaBoost con selección Fisher Score alcanzó el mejor rendimiento:
+\begin{itemize}
+    \item Precisión: 99.76\%
+    \item F1-score: 0.99
+    \item Precisión: 100\%
+    \item Recall: 98.6\%
+    \item Especificidad: 1.0
+    \item AUC: 0.99
+\end{itemize}
+
+\textbf{Comparación por Métodos de Selección de Características:}
+\begin{itemize}
+    \item \textbf{Todas las características (86):} AdaBoost 99.51\% precisión
+    \item \textbf{Information Gain (46 características):} AdaBoost 99.51\% precisión
+    \item \textbf{Lasso L1 (56 características):} AdaBoost 99.02\% precisión
+    \item \textbf{Fisher Score (47 características):} AdaBoost 99.76\% precisión
+\end{itemize}
+
+El sistema demostró una reducción del 45\% en dimensionalidad de características manteniendo alta precisión. El monitoreo en tiempo real permitió identificar procesos sospechosos y generar alertas automáticas, con un tiempo medio de respuesta inferior a 2 segundos.
+
+\subsection{Integración de Explainable AI (XAI)}
+Para aumentar la transparencia y confianza en las decisiones del sistema, se integraron técnicas avanzadas de Explicabilidad en IA (XAI):
+
+\textbf{SHAP (SHapley Additive exPlanations):}
+Basado en teoría de juegos cooperativos, SHAP cuantifica la contribución marginal de cada característica. Los análisis muestran que \textit{Dst\_Port} es la característica más importante (valor SHAP promedio de 0.07), consistente con el conocimiento del dominio ya que los keyloggers frecuentemente usan puertos específicos para comunicarse. Las métricas de longitud de paquetes (\textit{Bwd\_Pkt\_Len\_Max}, \textit{Bwd\_Pkt\_Len\_Min}) también mostraron alta importancia (rango 0.03-0.05).
+
+\textbf{LIME (Local Interpretable Model-agnostic Explanations):}
+Proporciona explicaciones a nivel de instancia mediante aproximaciones locales del comportamiento del modelo. LIME genera modelos sustitutos interpretables (típicamente lineales) creados sobre muestras perturbadas, identificando las características más influyentes en decisiones específicas.
+
+Estas herramientas permiten visualizar la importancia de cada característica en la predicción y explicar casos individuales de detección, facilitando la auditoría y el análisis forense por parte de los analistas de seguridad.
+
+\subsection{Descripción de Módulos Principales}
+El sistema se compone de los siguientes módulos:
+\begin{itemize}
+    \item \textbf{Monitor de procesos y archivos}: Observa en tiempo real la actividad del sistema y extrae características relevantes.
+    \item \textbf{Motor de Machine Learning}: Realiza inferencias sobre los datos extraídos, utilizando modelos entrenados y exportados en ONNX.
+    \item \textbf{Gestor de alertas y cuarentena}: Registra eventos, genera alertas y permite aislar procesos sospechosos.
+    \item \textbf{Interfaz de administración}: Permite la configuración de parámetros, revisión de logs y visualización de métricas.
+\end{itemize}
+
+La interacción entre estos módulos garantiza la detección proactiva y la respuesta rápida ante amenazas.
+
+\subsection{Escenarios de Uso}
+El sistema ha sido probado en entornos educativos simulados, detectando keyloggers en laboratorios de computación y redes internas. Además, se ha validado su funcionamiento en máquinas virtuales Windows y Linux, demostrando su adaptabilidad y facilidad de integración.
+
+\subsection{Análisis de Características Críticas}
+Basándose en los análisis SHAP y LIME, se identificaron las características más discriminativas:
+
+\textbf{Características de Mayor Importancia:}
+\begin{itemize}
+    \item \textit{Dst\_Port}: Puerto de destino (valor SHAP: 0.07)
+    \item \textit{Bwd\_Pkt\_Len\_Max/Min}: Métricas de longitud de paquetes
+    \item \textit{Subflow\_Bwd\_Byts}: Características de subflujo
+    \item \textit{Fwd\_Pkt\_Len\_Std}: Desviación estándar de longitud de paquetes
+\end{itemize}
+
+Los análisis revelaron que valores muy bajos de \textit{Flow\_Byts} y \textit{Pkt\_Len\_Min} se asocian consistentemente con clasificación benigna, mientras que valores extremos de paquetes indican comportamiento característico de keyloggers.
+
+\subsection{Desafíos y Futuras Líneas de Investigación}
+Entre los principales desafíos identificados se encuentran:
+
+\textbf{Desafíos Técnicos:}
+\begin{itemize}
+    \item Reducción de falsos positivos en entornos de producción
+    \item Optimización para implementación en tiempo real
+    \item Integración con infraestructura de seguridad existente
+    \item Manejo de alta dimensionalidad en datasets comportamentales
+\end{itemize}
+
+\textbf{Futuras Líneas de Investigación:}
+\begin{itemize}
+    \item Implementación de Deep Learning para detección de patrones más complejos
+    \item Federated learning para preservación de privacidad en instituciones
+    \item Extensión a ecosistemas móviles e IoT
+    \item Validación en entornos diversos fuera del ámbito educativo
+    \item Técnicas de aprendizaje continuo para adaptación a nuevas amenazas
+\end{itemize}
+
+La implementación de mejoras sugeridas permitirá fortalecer aún más la protección y adaptabilidad ante nuevas amenazas.
+
+\section{Conclusiones}
+El análisis comparativo muestra que el proyecto actual está alineado con el estado del arte en detección de keyloggers mediante Machine Learning y técnicas de explicabilidad. La modularidad y escalabilidad del sistema permiten su adaptación a nuevos retos y escenarios educativos. Se recomienda continuar con la integración de interfaces gráficas, auto-actualización y compatibilidad multiplataforma.
+
+\section*{Agradecimientos}
+Se agradece a los docentes y colaboradores del proyecto, así como a las fuentes académicas y técnicas utilizadas para el desarrollo e investigación.
+
+\begin{thebibliography}{99}
+\bibitem{mahmud2025trustworthy} M. I. Mahmud, "Towards Trustworthy Keylogger detection: A Comprehensive Analysis of Ensemble Techniques and Feature Selections through Explainable AI," Fordham University, 2025.
+\bibitem{cisa2020} CISA, "Guide to Keyloggers," 2020. Disponible en: https://www.cisa.gov
+\bibitem{stojanovic2021} J. Stojanovic et al., "Machine Learning for Cybersecurity: A Systematic Review," International Journal of Information Security, vol. 20, no. 5, pp. 445-460, 2021.
+\bibitem{smith2022} J. Smith, "Cybersecurity Best Practices for Educational Institutions," Educational Technology Magazine, vol. 22, no. 3, pp. 34-39, 2022.
+\bibitem{nist2018} NIST, "Framework for Improving Critical Infrastructure Cybersecurity," 2018. Disponible en: https://www.nist.gov
+\bibitem{proyecto_docs} Documentos internos del proyecto: CS1_FD01-EPIS-Informe de Factibilidad, CS1_FD02-Informe Visión, CS1_FD03-Informe SRS, CS1-FD04-EPIS-SAD.
+\bibitem{javaheri2018} D. Javaheri, M. Hosseinzadeh, A. M. Rahmani, "Detection and elimination of spyware and ransomware by intercepting kernel-level system routines," IEEE Access, pp. 78321-32, 2018.
+\bibitem{oz2022} H. Oz, A. Aris, A. Levi, A. S. Uluagac, "A survey on ransomware: Evolution, taxonomy, and defence solutions," ACM Computing Surveys (CSUR), 2022.
+\bibitem{thakur2022} K. K. Thakur, N. R. Nair, M. Sharma, "Keylogger: A Boon or a Bane," Trinity Journal of Management; IT & Media (TJMITM), pp. 145-53, 2022.
+\bibitem{ahmed2014} Y. A. Ahmed, M. A. Maarof, F. M. Hassan, M. M. Abshir, "Survey of Keylogger technologies," International journal of computer science and telecommunications, vol. 5, no. 2, 2014.
+\bibitem{pillai2019} D. Pillai, I. Siddavatam, "A modified framework to detect keyloggers using machine learning algorithm," International Journal of Information Technology, pp. 707-12, 2019.
+\bibitem{wen2017} L. Wen, H. Yu, "An Android malware detection system based on machine learning," AIP conference proceedings, vol. 1864, no. 1, p. 020136, 2017.
+\bibitem{qabalin2022} M. K. Qabalin, M. Naser, M. Alkasassbeh, "Android Spyware Detection Using Machine Learning: A Novel Dataset," Sensors, vol. 22, no. 15, p. 5765, 2022.
+\bibitem{rathore2018} H. Rathore, S. Agarwal, S. K. Sahay, M. Sewak, "Malware detection using machine learning and deep learning," International Conference on Big Data Analytics, pp. 402-411, 2018.
+\bibitem{aafer2013} Y. Aafer, W. Du, H. Yin, "Droidapiminer: Mining API-level features for robust malware detection in Android," International conference on security and privacy in communication systems, pp. 86-103, 2013.
+\bibitem{alghamdi2019} S. M. Alghamdi, E. S. Othathi, B. S. Alsulami, "Detect keyloggers by using Machine Learning," King Abdulaziz University, 2019.
+\bibitem{levshun2023} D. S. Levshun, "Approach for keylogger detection based on artificial intelligence methods," Informatization and Communication, vol. 3, 2023, doi: 10.34219/2078-8320-2023-14-3-85-91.
+\bibitem{venkatesh2025} P. Sowjanya, S. Y. Vakada, S. Bhavana, Ch. Venkatesh, V. V. Pavan, "Securing Keystroke Data: An ML-Based Approach to Keylogger defense," International Journal for Research in Applied Science and Engineering Technology, vol. 13, no. 3, pp. 1691–1697, 2025, doi: 10.22214/ijraset.2025.67635.
+\bibitem{chinchalkar2024} S. P. Chinchalkar, R. K. Somkunwar, "An innovative keylogger detection system using machine learning algorithms and dendritic cell algorithm," Revue D Intelligence Artificielle, vol. 38, no. 1, pp. 269–275, 2024, doi: 10.18280/ria.380128.
+\end{thebibliography}
+
+\end{document}

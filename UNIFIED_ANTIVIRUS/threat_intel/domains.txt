@@ -1,0 +1,20 @@
+# Archivo de dominios sospechosos
+# Formato: un dominio por línea
+# Líneas que comienzan con # son comentarios
+
+# URL shorteners sospechosos
+bit.ly
+tinyurl.com
+t.co
+short.link
+
+# Dominios DGA conocidos
+tempuri.org
+example-malware.com
+malware-traffic-analysis.net
+
+# Dominios de phishing conocidos
+phishing-example.com
+fake-bank.net
+
+# Agregue más dominios sospechosos aquí...

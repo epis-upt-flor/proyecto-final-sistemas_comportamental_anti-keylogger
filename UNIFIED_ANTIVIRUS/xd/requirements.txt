@@ -1,0 +1,166 @@
+# ===================================================================
+# 🛡️ SISTEMA ANTI-KEYLOGGER - DEPENDENCIAS COMPLETAS
+# ===================================================================
+# Archivo: requirements.txt
+# Propósito: Instalar todas las dependencias necesarias del sistema
+# Uso: pip install -r requirements.txt
+# ===================================================================
+
+# ─────────────────────────────────────────────────────────────────
+# 📊 CORE - DEPENDENCIAS BÁSICAS DEL SISTEMA
+# ─────────────────────────────────────────────────────────────────
+
+# Monitoreo del sistema y procesos
+psutil>=5.9.0
+
+# Monitor de archivos y directorios
+watchdog>=2.1.9
+
+# Configuración TOML
+toml>=0.10.2
+
+# Manipulación de fechas y tiempo
+python-dateutil>=2.8.2
+
+# ─────────────────────────────────────────────────────────────────
+# 🤖 MACHINE LEARNING - MODELOS Y PREDICCIONES
+# ─────────────────────────────────────────────────────────────────
+
+# Modelos ONNX para inferencia rápida
+onnxruntime>=1.15.0
+
+# Cálculos numéricos optimizados
+numpy>=1.24.0
+
+# Manipulación de datos estructurados
+pandas>=2.0.0
+
+# Algoritmos de machine learning
+scikit-learn>=1.3.0
+
+# Serialización de modelos (pickle mejorado)
+joblib>=1.3.0
+
+# ─────────────────────────────────────────────────────────────────
+# 🎨 INTERFAZ GRÁFICA - UI Y VISUALIZACIÓN
+# ─────────────────────────────────────────────────────────────────
+
+# NOTA: tkinter viene incluido con Python estándar
+# No se requiere instalación adicional para tkinter
+
+# ─────────────────────────────────────────────────────────────────
+# 📊 ANÁLISIS Y VISUALIZACIÓN (OPCIONAL)
+# ─────────────────────────────────────────────────────────────────
+
+# Gráficos y visualización (para análisis opcional)
+matplotlib>=3.7.0
+
+# Visualización estadística avanzada
+seaborn>=0.12.0
+
+# Gráficos interactivos (para reportes)
+plotly>=5.15.0
+
+# ─────────────────────────────────────────────────────────────────
+# 🌐 NETWORKING Y COMUNICACIONES
+# ─────────────────────────────────────────────────────────────────
+
+# Cliente HTTP mejorado
+requests>=2.31.0
+
+# Análisis de URLs y dominios
+urllib3>=2.0.0
+
+# ─────────────────────────────────────────────────────────────────
+# 📝 LOGGING Y DEBUGGING
+# ─────────────────────────────────────────────────────────────────
+
+# Logging avanzado con colores
+coloredlogs>=15.0
+
+# Logging estructurado
+structlog>=23.0.0
+
+# ─────────────────────────────────────────────────────────────────
+# 🔒 SEGURIDAD Y CRIPTOGRAFÍA
+# ─────────────────────────────────────────────────────────────────
+
+# Hash y funciones criptográficas
+hashlib3>=1.0.1
+
+# Análisis de archivos PE (Windows executables)
+pefile>=2023.2.7
+
+# ─────────────────────────────────────────────────────────────────
+# ⚡ PERFORMANCE Y OPTIMIZACIÓN
+# ─────────────────────────────────────────────────────────────────
+
+# Aceleración numérica
+numba>=0.57.0
+
+# Multiprocesamiento mejorado
+multiprocess>=0.70.0
+
+# ─────────────────────────────────────────────────────────────────
+# 🛠️ HERRAMIENTAS DE DESARROLLO (OPCIONAL)
+# ─────────────────────────────────────────────────────────────────
+
+# Testing framework
+pytest>=7.4.0
+
+# Análisis de código
+flake8>=6.0.0
+
+# Formateo de código
+black>=23.0.0
+
+# ===================================================================
+# 📋 INSTRUCCIONES DE INSTALACIÓN
+# ===================================================================
+#
+# 1. INSTALACIÓN BÁSICA (solo dependencias core):
+#    pip install psutil watchdog toml onnxruntime numpy pandas scikit-learn
+#
+# 2. INSTALACIÓN COMPLETA (todas las dependencias):
+#    pip install -r requirements.txt
+#
+# 3. INSTALACIÓN CON ENTORNO VIRTUAL (recomendado):
+#    python -m venv antivirus_env
+#    antivirus_env\Scripts\activate     # Windows
+#    pip install -r requirements.txt
+#
+# 4. VERIFICAR INSTALACIÓN:
+#    python -c "import psutil, watchdog, onnxruntime, numpy, pandas; print('✅ Todas las dependencias instaladas correctamente')"
+#
+# ===================================================================
+# 🎯 DEPENDENCIAS POR COMPONENTE
+# ===================================================================
+#
+# 🖥️ INTERFAZ UI (continuous_ui.py):
+#    - psutil (estadísticas del sistema)
+#    - tkinter (interfaz gráfica - incluido con Python)
+#
+# 🤖 DETECTOR ML (ml_detector.py):
+#    - onnxruntime (modelos ONNX)
+#    - numpy (cálculos numéricos)
+#    - pandas (manipulación de datos)
+#    - scikit-learn (preprocessing)
+#
+# 📡 MONITORES (network_monitor.py, process_monitor.py):
+#    - psutil (información del sistema)
+#    - watchdog (monitor de archivos)
+#
+# ⚙️ CONFIGURACIÓN (engine.py, facade.py):
+#    - toml (archivos de configuración)
+#
+# ===================================================================
+# 💡 NOTAS IMPORTANTES
+# ===================================================================
+#
+# - Python 3.13+ requerido
+# - Windows 10/11 recomendado
+# - Ejecutar como administrador para funcionalidad completa
+# - Algunas dependencias son opcionales para análisis avanzado
+# - tkinter viene incluido con Python estándar
+#
+# ===================================================================

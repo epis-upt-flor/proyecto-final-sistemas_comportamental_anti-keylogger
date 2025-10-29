@@ -1,0 +1,18 @@
+# Archivo de IPs maliciosas conocidas
+# Formato: una IP por línea
+# Líneas que comienzan con # son comentarios
+
+# Tor exit nodes conocidos
+185.220.100.240
+185.220.100.241
+185.220.100.242
+
+# Botnets conocidos  
+94.102.49.190
+94.102.49.191
+
+# C&C servers conocidos
+198.23.140.37
+185.159.157.154
+
+# Agregue más IPs maliciosas aquí...

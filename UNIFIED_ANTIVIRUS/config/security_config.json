@@ -1,0 +1,78 @@
+{
+    "security": {
+        "access_control": {
+            "require_admin": false,
+            "config_protection": true,
+            "logs_protection": true,
+            "models_protection": true
+        },
+        "integrity": {
+            "file_verification": true,
+            "checksum_validation": true,
+            "signature_verification": false,
+            "tamper_detection": true
+        },
+        "encryption": {
+            "encrypt_logs": false,
+            "encrypt_config": false,
+            "key_storage": "local",
+            "algorithm": "AES-256"
+        }
+    },
+    "monitoring": {
+        "self_protection": {
+            "enabled": true,
+            "monitor_own_processes": true,
+            "detect_termination_attempts": true,
+            "auto_restart": false
+        },
+        "system_monitoring": {
+            "monitor_services": true,
+            "track_system_changes": true,
+            "registry_monitoring": false,
+            "file_system_monitoring": true
+        }
+    },
+    "response": {
+        "automated_responses": {
+            "enabled": true,
+            "kill_suspicious_processes": false,
+            "quarantine_threats": true,
+            "block_network_access": false,
+            "create_system_restore": false
+        },
+        "manual_approval": {
+            "required_for_quarantine": false,
+            "required_for_process_kill": true,
+            "required_for_network_block": true,
+            "timeout_seconds": 300
+        }
+    },
+    "compliance": {
+        "data_retention": {
+            "logs_retention_days": 30,
+            "quarantine_retention_days": 7,
+            "reports_retention_days": 90
+        },
+        "privacy": {
+            "anonymize_data": true,
+            "collect_minimal_data": true,
+            "user_consent_required": false,
+            "data_sharing_disabled": true
+        }
+    },
+    "backup": {
+        "config_backup": {
+            "enabled": true,
+            "frequency": "daily",
+            "retention_count": 7,
+            "backup_path": "backups/config/"
+        },
+        "logs_backup": {
+            "enabled": false,
+            "frequency": "weekly",
+            "compression": true,
+            "backup_path": "backups/logs/"
+        }
+    }
+}

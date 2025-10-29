@@ -1,0 +1,67 @@
+{
+  "plugin_info": {
+    "name": "ml_detector",
+    "version": "1.0.0",
+    "description": "Detector de keyloggers usando Machine Learning con modelos ONNX optimizados",
+    "author": "Sistema Anti-Keylogger Unificado",
+    "category": "detectors",
+    "priority": 1
+  },
+  "ml_config": {
+    "model_path": "../../../models",
+    "use_onnx": true,
+    "confidence_threshold": 0.8,
+    "prediction_timeout_ms": 5000,
+    "batch_size": 32,
+    "enable_caching": true,
+    "cache_size": 1000
+  },
+  "models": {
+    "primary_onnx": "modelo_keylogger_from_datos.onnx",
+    "secondary_onnx": "keylogger_model_large_20250918_112840.onnx", 
+    "fallback_sklearn": "rf_large_model_20250918_112442.pkl",
+    "label_classes": "label_classes.json",
+    "metadata": "onnx_metadata_large_20250918_112840.json"
+  },
+  "feature_extraction": {
+    "expected_features": 81,
+    "flow_timeout_seconds": 30,
+    "min_packets_per_flow": 3,
+    "enable_flow_aggregation": true,
+    "normalize_features": true
+  },
+  "performance": {
+    "max_concurrent_predictions": 4,
+    "prediction_cache_ttl": 300,
+    "enable_async_processing": true,
+    "log_prediction_times": true
+  },
+  "events": {
+    "subscriptions": [
+      "network_data_available",
+      "scan_requested", 
+      "config_updated",
+      "system_startup"
+    ],
+    "publications": [
+      "threat_detected",
+      "ml_analysis_completed",
+      "model_loaded",
+      "prediction_error",
+      "performance_stats"
+    ]
+  },
+  "logging": {
+    "level": "INFO",
+    "enable_debug": false,
+    "log_predictions": true,
+    "log_feature_extraction": false,
+    "max_log_size_mb": 50
+  },
+  "security": {
+    "validate_input": true,
+    "sanitize_network_data": true,
+    "max_input_size_mb": 10,
+    "enable_model_integrity_check": true
+  }
+}

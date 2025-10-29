@@ -1,0 +1,89 @@
+{
+  "plugin_name": "network_detector",
+  "version": "1.0.0",
+  "category": "detectors",
+  "author": "Anti-Keylogger Team",
+  "description": "Detector de patrones de red maliciosos para identificar comunicaciones C&C, exfiltración de datos y beacons de keyloggers",
+  
+  "network_config": {
+    "analysis_window_minutes": 10,
+    "min_connections_for_pattern": 3,
+    "beacon_tolerance": 0.3,
+    "suspicious_upload_threshold": 1024,
+    "c2_confidence_threshold": 0.7,
+    "max_connections_per_minute": 50,
+    "data_exfiltration_threshold": 5120,
+    "dns_query_limit": 100
+  },
+  
+  "threat_intelligence": {
+    "enable_ip_reputation": true,
+    "enable_domain_analysis": true,
+    "enable_geolocation": true,
+    "malicious_ips_file": "threat_intel/malicious_ips.txt",
+    "suspicious_domains_file": "threat_intel/domains.txt",
+    "reputation_cache_hours": 24,
+    "max_reputation_queries": 1000
+  },
+  
+  "detection_thresholds": {
+    "c2_beacon_min_count": 5,
+    "c2_beacon_regularity": 0.8,
+    "exfiltration_ratio_threshold": 0.8,
+    "dns_tunnel_length_threshold": 64,
+    "protocol_anomaly_score": 0.7,
+    "suspicious_port_count": 3
+  },
+  
+  "whitelist": {
+    "trusted_ips": [
+      "8.8.8.8",
+      "1.1.1.1", 
+      "208.67.222.222"
+    ],
+    "trusted_domains": [
+      "google.com",
+      "microsoft.com",
+      "windows.com",
+      "github.com"
+    ],
+    "system_processes": [
+      "svchost.exe",
+      "explorer.exe",
+      "winlogon.exe"
+    ]
+  },
+  
+  "monitoring": {
+    "capture_packets": false,
+    "log_all_connections": false,
+    "detailed_analysis": true,
+    "save_threat_samples": true,
+    "alert_on_new_ips": true
+  },
+  
+  "performance": {
+    "max_memory_usage_mb": 256,
+    "connection_history_limit": 10000,
+    "cleanup_interval_minutes": 30,
+    "analysis_threads": 2,
+    "batch_processing": true
+  },
+  
+  "logging": {
+    "level": "INFO",
+    "log_file": "logs/network_detector.log",
+    "max_log_size_mb": 50,
+    "backup_count": 5,
+    "log_network_events": true,
+    "log_threat_intelligence": true
+  },
+  
+  "alerts": {
+    "immediate_threats": ["c2_communication", "data_exfiltration"],
+    "delayed_threats": ["beacon_pattern", "dns_tunnel"],
+    "alert_cooldown_minutes": 5,
+    "max_alerts_per_hour": 100,
+    "notification_methods": ["event_bus", "log_file"]
+  }
+}

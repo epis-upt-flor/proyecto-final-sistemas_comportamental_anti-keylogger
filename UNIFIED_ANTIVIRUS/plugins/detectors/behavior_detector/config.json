@@ -1,0 +1,200 @@
+{
+  "plugin_info": {
+    "name": "behavior_detector",
+    "version": "1.0.0", 
+    "description": "Detector heurístico de comportamientos típicos de keyloggers mediante análisis de patrones",
+    "author": "Sistema Anti-Keylogger Unificado",
+    "category": "detectors",
+    "priority": 2
+  },
+  "behavior_config": {
+    "risk_threshold": 0.7,
+    "enable_whitelist": true,
+    "enable_advanced_analysis": true,
+    "enable_process_analysis": true,
+    "enable_network_analysis": true,
+    "enable_file_analysis": true,
+    "enable_system_analysis": true,
+    "analysis_timeout_ms": 10000
+  },
+  "detection_rules": {
+    "process_behavior": {
+      "keylogger_process_patterns": [
+        ".*keylog.*",
+        ".*spyware.*", 
+        ".*stealer.*",
+        ".*monitor.*",
+        ".*capture.*",
+        ".*recorder.*",
+        ".*hook.*",
+        ".*spy.*"
+      ],
+      "suspicious_command_lines": [
+        ".*hook.*keyboard.*",
+        ".*capture.*key.*",
+        ".*log.*key.*",
+        ".*GetAsyncKeyState.*",
+        ".*SetWindowsHookEx.*",
+        ".*RegisterRawInputDevices.*",
+        ".*keybd_event.*",
+        ".*SendInput.*"
+      ],
+      "dangerous_apis": [
+        "SetWindowsHookEx",
+        "GetAsyncKeyState", 
+        "RegisterRawInputDevices",
+        "GetForegroundWindow",
+        "GetWindowText",
+        "keybd_event",
+        "SendInput",
+        "RegisterHotKey"
+      ]
+    },
+    "network_behavior": {
+      "data_exfiltration_patterns": [
+        "frequent_small_uploads",
+        "encrypted_data_streams", 
+        "unusual_protocol_usage",
+        "suspicious_destination_ips",
+        "high_upload_ratio"
+      ],
+      "command_control_patterns": [
+        "periodic_beacons",
+        "encrypted_communications",
+        "non_standard_ports",
+        "dns_tunneling", 
+        "http_covert_channels"
+      ]
+    },
+    "file_behavior": {
+      "suspicious_file_operations": [
+        "credential_file_access",
+        "temporary_file_creation",
+        "log_file_generation", 
+        "encrypted_file_storage"
+      ],
+      "keylogger_file_patterns": [
+        ".*\\.keylog$",
+        ".*passwords?\\.txt$",
+        ".*credentials?\\.txt$", 
+        ".*capture.*\\.log$",
+        ".*keys?\\.dat$",
+        ".*stolen.*\\.txt$",
+        ".*logs?\\.txt$"
+      ],
+      "suspicious_directories": [
+        "%TEMP%",
+        "%APPDATA%\\\\Local\\\\Temp",
+        "C:\\\\Windows\\\\Temp",
+        ".*\\\\AppData\\\\Local\\\\.*"
+      ]
+    },
+    "system_behavior": {
+      "registry_modifications": [
+        "startup_entries",
+        "persistence_mechanisms",
+        "security_bypasses",
+        "autorun_entries"
+      ],
+      "persistence_locations": [
+        "HKEY_CURRENT_USER\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run",
+        "HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run",
+        "HKEY_CURRENT_USER\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce"
+      ]
+    }
+  },
+  "whitelist": {
+    "enabled": true,
+    "allowed_processes": [
+      "explorer.exe",
+      "notepad.exe", 
+      "chrome.exe",
+      "firefox.exe",
+      "msedge.exe",
+      "outlook.exe",
+      "teams.exe",
+      "skype.exe",
+      "discord.exe",
+      "steam.exe",
+      "winrar.exe",
+      "7zfm.exe",
+      "code.exe",
+      "devenv.exe",
+      "python.exe",
+      "node.exe",
+      "java.exe",
+      "javaw.exe"
+    ],
+    "trusted_directories": [
+      "%PROGRAMFILES%",
+      "%PROGRAMFILES(X86)%",
+      "%WINDIR%",
+      "%SYSTEM32%",
+      "%PROGRAMDATA%\\\\Microsoft",
+      "C:\\\\Windows\\\\System32",
+      "C:\\\\Windows\\\\SysWOW64"
+    ],
+    "whitelist_behavior": {
+      "skip_analysis_for_whitelisted": true,
+      "log_whitelisted_access": false,
+      "strict_path_matching": true
+    }
+  },
+  "risk_scoring": {
+    "weights": {
+      "suspicious_process_name": 0.8,
+      "suspicious_command_line": 0.9,
+      "keylogger_behavior_pattern": 1.0,
+      "external_communication": 0.4,
+      "credential_file_access": 0.5,
+      "hidden_process": 0.3,
+      "registry_modification": 0.6,
+      "api_hooking": 0.9,
+      "data_exfiltration": 0.8
+    },
+    "thresholds": {
+      "low_risk": 0.3,
+      "medium_risk": 0.5,
+      "high_risk": 0.7,
+      "critical_risk": 0.9
+    }
+  },
+  "performance": {
+    "max_concurrent_analyses": 3,
+    "analysis_cache_ttl": 60,
+    "enable_async_processing": true,
+    "batch_process_limit": 50,
+    "analysis_timeout_seconds": 30
+  },
+  "events": {
+    "subscriptions": [
+      "process_data_available",
+      "network_data_available",
+      "file_access_data",
+      "scan_requested",
+      "config_updated"
+    ],
+    "publications": [
+      "threat_detected",
+      "behavior_analysis_completed", 
+      "whitelist_violation",
+      "high_risk_behavior",
+      "suspicious_pattern_detected"
+    ]
+  },
+  "logging": {
+    "level": "INFO",
+    "enable_debug": false,
+    "log_whitelisted_processes": false,
+    "log_all_analyses": false,
+    "log_rule_matches": true,
+    "max_log_size_mb": 25
+  },
+  "advanced_analysis": {
+    "enable_behavioral_profiling": true,
+    "enable_process_tree_analysis": true,
+    "enable_network_correlation": true,
+    "enable_timeline_analysis": true,
+    "correlation_window_minutes": 10
+  }
+}

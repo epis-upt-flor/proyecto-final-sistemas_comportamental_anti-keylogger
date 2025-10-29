@@ -1,0 +1,55 @@
+{
+  "window_size": "1200x800",
+  "theme": "dark",
+  "auto_start": false,
+  "log_level": "suspicious",
+  "alert_sounds": true,
+  "presets": {
+    "basic": {
+      "sensitivity": "low",
+      "features": [
+        "behavior"
+      ]
+    },
+    "standard": {
+      "sensitivity": "medium",
+      "features": [
+        "behavior",
+        "ml"
+      ]
+    },
+    "advanced": {
+      "sensitivity": "high",
+      "features": [
+        "behavior",
+        "ml",
+        "network"
+      ]
+    }
+  },
+  "max_threats_display": 50,
+  "aggregate_duplicates": false,
+  "update_interval": 500,
+  "threat_filter_keywords": [],
+  "max_display": "50",
+  "sensitivity": "paranoid",
+  "behavior_detection": true,
+  "ml_detection": true,
+  "network_detection": true,
+  "memory_detection": true,
+  "cpu_detection": true,
+  "file_detection": true,
+  "registry_detection": true,
+  "process_injection": true,
+  "cpu_threshold": "50",
+  "memory_threshold": "200",
+  "monitor_interval": "0.1",
+  "auto_quarantine": true,
+  "auto_kill_suspicious": true,
+  "auto_block_network": true,
+  "auto_backup_before_action": true,
+  "auto_notify_user": true,
+  "auto_log_detailed": true,
+  "auto_update_whitelist": true,
+  "update_frequency": "500"
+}

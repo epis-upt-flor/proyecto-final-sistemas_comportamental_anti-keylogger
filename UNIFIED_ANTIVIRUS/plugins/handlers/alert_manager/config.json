@@ -1,0 +1,30 @@
+{
+  "channels": {
+    "console": {
+      "enabled": true,
+      "level": "INFO"
+    },
+    "file": {
+      "enabled": true,
+      "path": "logs/alerts.log",
+      "level": "WARNING"
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username": "",
+      "password": "",
+      "recipients": []
+    },
+    "system": {
+      "enabled": true,
+      "show_notifications": true
+    }
+  },
+  "alert_levels": ["INFO", "WARNING", "CRITICAL", "EMERGENCY"],
+  "max_history": 1000,
+  "alert_timeout": 300,
+  "auto_acknowledge": false,
+  "sound_alerts": true
+}

@@ -1,0 +1,75 @@
+{
+    "whitelist": {
+        "enabled": true,
+        "description": "Lista blanca de procesos y directorios confiables",
+        "allowed_processes": [
+            "chrome.exe",
+            "firefox.exe",
+            "msedge.exe",
+            "code.exe",
+            "notepad.exe",
+            "explorer.exe",
+            "winlogon.exe",
+            "csrss.exe",
+            "wininit.exe",
+            "services.exe",
+            "lsass.exe",
+            "svchost.exe",
+            "dwm.exe",
+            "conhost.exe",
+            "system",
+            "registry",
+            "memory compression",
+            "system idle process",
+            "audiodg.exe",
+            "spoolsv.exe",
+            "taskhostw.exe"
+        ],
+        "trusted_directories": [
+            "%ProgramFiles%",
+            "%ProgramFiles(x86)%",
+            "%Windows%",
+            "%System32%",
+            "%SysWOW64%",
+            "%ProgramData%\\Microsoft",
+            "%LocalAppData%\\Microsoft"
+        ],
+        "excluded_extensions": [
+            ".exe",
+            ".dll",
+            ".sys",
+            ".ocx",
+            ".scr"
+        ],
+        "monitoring_exceptions": {
+            "high_cpu_processes": [
+                "chrome.exe",
+                "firefox.exe",
+                "code.exe",
+                "games.exe",
+                "video_editor.exe"
+            ],
+            "network_intensive": [
+                "chrome.exe",
+                "firefox.exe",
+                "steam.exe",
+                "discord.exe",
+                "zoom.exe"
+            ]
+        }
+    },
+    "allowed_processes": [
+        "explorer.exe",
+        "winlogon.exe",
+        "csrss.exe",
+        "wininit.exe",
+        "services.exe",
+        "lsass.exe",
+        "svchost.exe",
+        "dwm.exe",
+        "System",
+        "Registry",
+        "smss.exe",
+        "conhost.exe"
+    ]
+}

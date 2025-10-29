@@ -1,0 +1,80 @@
+{
+    "alerts": {
+        "enabled": true,
+        "severity_levels": {
+            "low": {
+                "color": "#FFD700",
+                "action": "log_only",
+                "notification": false
+            },
+            "medium": {
+                "color": "#FF8C00",
+                "action": "log_and_notify",
+                "notification": true
+            },
+            "high": {
+                "color": "#FF4500",
+                "action": "log_notify_quarantine",
+                "notification": true,
+                "auto_quarantine": false
+            },
+            "critical": {
+                "color": "#FF0000",
+                "action": "immediate_response",
+                "notification": true,
+                "auto_quarantine": true,
+                "block_process": false
+            }
+        },
+        "notification_settings": {
+            "desktop_notifications": true,
+            "sound_alerts": false,
+            "email_notifications": false,
+            "webhook_url": null,
+            "max_notifications_per_minute": 5
+        },
+        "response_actions": {
+            "quarantine": {
+                "enabled": true,
+                "backup_original": true,
+                "quarantine_path": "quarantine/"
+            },
+            "process_termination": {
+                "enabled": false,
+                "confirm_before_kill": true,
+                "whitelist_check": true
+            },
+            "network_blocking": {
+                "enabled": false,
+                "block_suspicious_ips": false,
+                "firewall_integration": false
+            }
+        }
+    },
+    "thresholds": {
+        "suspicious_behavior": {
+            "cpu_usage_percent": 80,
+            "memory_growth_mb": 100,
+            "network_connections": 10,
+            "file_access_rate": 50
+        },
+        "ml_detection": {
+            "confidence_threshold": 0.7,
+            "keylogger_probability": 0.8,
+            "anomaly_score": 0.6
+        },
+        "network_analysis": {
+            "suspicious_ports": [
+                1337,
+                4444,
+                5555,
+                6666,
+                7777,
+                8080,
+                9999
+            ],
+            "max_external_connections": 15,
+            "data_transfer_threshold_mb": 10
+        }
+    }
+}

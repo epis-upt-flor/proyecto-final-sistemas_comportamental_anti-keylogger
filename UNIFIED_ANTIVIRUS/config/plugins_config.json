@@ -1,0 +1,106 @@
+{
+    "plugin_system": {
+        "enabled": true,
+        "auto_discovery": true,
+        "plugin_directories": [
+            "plugins"
+        ],
+        "default_timeout": 30,
+        "max_concurrent": 10,
+        "restart_on_failure": true,
+        "failure_threshold": 3
+    },
+    "detectors": {
+        "behavior_detector": {
+            "enabled": true,
+            "priority": 1,
+            "config": {
+                "cpu_threshold": 80,
+                "memory_threshold_mb": 100,
+                "scan_interval": 5,
+                "monitor_new_processes": true,
+                "track_process_tree": true
+            }
+        },
+        "ml_detector": {
+            "enabled": true,
+            "priority": 2,
+            "config": {
+                "confidence_threshold": 0.3
+            }
+        },
+        "network_detector": {
+            "enabled": true,
+            "priority": 3,
+            "config": {
+                "monitor_external": true,
+                "track_data_flows": true,
+                "analyze_protocols": [
+                    "TCP",
+                    "UDP"
+                ],
+                "deep_packet_inspection": false
+            }
+        },
+        "keylogger_detector": {
+            "enabled": true,
+            "priority": 1,
+            "config": {
+                "detection_sensitivity": "medium",
+                "detection_threshold": 0.6,
+                "monitor_hooks": true,
+                "monitor_files": true,
+                "monitor_stealth": true,
+                "auto_response": true,
+                "log_level": "info"
+            }
+        }
+    },
+    "interfaces": {
+        "tkinter_ui": {
+            "enabled": true,
+            "priority": 1,
+            "config": {
+                "window_size": [
+                    800,
+                    600
+                ],
+                "update_interval": 1000,
+                "theme": "default",
+                "show_graphs": true,
+                "auto_refresh": true
+            }
+        }
+    },
+    "handlers": {
+        "alert_manager": {
+            "enabled": false,
+            "priority": 1,
+            "config": {
+                "notification_types": [
+                    "desktop",
+                    "log"
+                ],
+                "severity_filter": "medium"
+            }
+        },
+        "quarantine_handler": {
+            "enabled": true,
+            "priority": 2,
+            "config": {
+                "auto_quarantine": false,
+                "backup_files": true,
+                "quarantine_path": "quarantine/"
+            }
+        },
+        "logger_handler": {
+            "enabled": true,
+            "priority": 3,
+            "config": {
+                "log_all_events": true,
+                "structured_logging": true,
+                "log_rotation": true
+            }
+        }
+    }
+}

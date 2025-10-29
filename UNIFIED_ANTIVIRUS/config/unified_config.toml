@@ -1,0 +1,73 @@
+# Configuración Principal del Sistema Anti-Keylogger Unificado
+# ============================================================
+
+[system]
+name = "Sistema Anti-Keylogger Unificado"
+version = "2.0.0"
+debug_mode = false
+log_level = "INFO"
+max_log_files = 10
+log_rotation_size = "10MB"
+
+[detection]
+# Configuración de detección general
+real_time_monitoring = true
+scan_interval_seconds = 2
+threat_cache_size = 1000
+auto_quarantine = false
+notification_level = "medium"
+
+[plugins]
+# Configuración de plugins
+auto_discover = true
+plugin_timeout_seconds = 30
+max_concurrent_plugins = 10
+plugin_directories = ["plugins"]
+
+[detectors.behavior]
+enabled = true
+cpu_threshold_percent = 80
+memory_threshold_mb = 100
+process_scan_interval = 2
+whitelist_system_processes = true
+
+[detectors.ml]
+enabled = true
+model_path = "models/modelo_keylogger_from_datos.onnx"
+confidence_threshold = 0.7
+batch_size = 32
+enable_realtime_analysis = true
+
+[detectors.network]
+enabled = true
+monitor_external_connections = true
+suspicious_ports = [1337, 4444, 5555, 6666, 7777, 8080, 9999]
+connection_timeout_seconds = 30
+max_connections_per_ip = 10
+
+[interfaces.ui]
+enabled = true
+window_title = "Sistema Anti-Keylogger Unificado"
+window_size = [800, 600]
+update_interval_ms = 1000
+show_detailed_logs = false
+theme = "default"
+
+[quarantine]
+enabled = true
+quarantine_directory = "quarantine"
+auto_quarantine_high_risk = false
+keep_quarantine_days = 30
+
+[notifications]
+enabled = true
+show_desktop_notifications = true
+sound_alerts = false
+log_to_file = true
+email_alerts = false
+
+[performance]
+max_memory_usage_mb = 512
+max_cpu_usage_percent = 25
+cleanup_interval_minutes = 60
+cache_size_mb = 100

@@ -1,0 +1,14 @@
+{
+  "quarantine_directory": "quarantine",
+  "max_file_size": "100MB",
+  "max_quarantine_size": "1GB",
+  "retention_days": 30,
+  "compress_files": true,
+  "encrypt_files": false,
+  "auto_cleanup": true,
+  "allowed_extensions": [".exe", ".dll", ".scr", ".bat", ".com", ".pif", ".js", ".vbs"],
+  "backup_before_quarantine": true,
+  "notification_on_quarantine": true,
+  "auto_quarantine_high_confidence": true,
+  "confidence_threshold": 0.8
+}

@@ -1,0 +1,75 @@
+{
+    "models": {
+        "primary_model": {
+            "name": "keylogger_detector_onnx",
+            "path": "models/modelo_keylogger_from_datos.onnx",
+            "type": "onnx",
+            "enabled": true,
+            "confidence_threshold": 0.7,
+            "preprocessing": {
+                "normalize_features": true,
+                "feature_scaling": "standard",
+                "handle_missing": "mean"
+            }
+        },
+        "backup_model": {
+            "name": "random_forest_backup",
+            "path": "models/rf_large_model_20250918_112442.pkl",
+            "type": "pickle",
+            "enabled": false,
+            "confidence_threshold": 0.6
+        }
+    },
+    "feature_extraction": {
+        "process_features": {
+            "cpu_usage": true,
+            "memory_usage": true,
+            "network_connections": true,
+            "file_operations": true,
+            "registry_access": false,
+            "keyboard_hooks": true,
+            "window_monitoring": true
+        },
+        "behavioral_features": {
+            "process_creation_rate": true,
+            "network_frequency": true,
+            "file_modification_patterns": true,
+            "memory_access_patterns": true,
+            "dll_injection_detection": true
+        },
+        "temporal_features": {
+            "time_windows": [5, 15, 30, 60],
+            "sliding_window": true,
+            "aggregation_methods": ["mean", "max", "std"]
+        }
+    },
+    "training": {
+        "data_collection": {
+            "enabled": false,
+            "anonymize": true,
+            "store_path": "training_data/",
+            "max_samples": 10000
+        },
+        "auto_retrain": {
+            "enabled": false,
+            "schedule": "weekly",
+            "min_samples": 1000,
+            "validation_split": 0.2
+        }
+    },
+    "inference": {
+        "batch_size": 32,
+        "max_latency_ms": 100,
+        "parallel_processing": true,
+        "gpu_acceleration": false,
+        "cache_predictions": true,
+        "prediction_history": 100
+    },
+    "model_management": {
+        "auto_update": false,
+        "version_control": true,
+        "fallback_enabled": true,
+        "performance_monitoring": true,
+        "accuracy_threshold": 0.85
+    }
+}

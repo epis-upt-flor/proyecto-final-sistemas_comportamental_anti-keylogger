@@ -1,0 +1,212 @@
+{
+    "profile_configurations": {
+        "home": {
+            "name": "Uso Doméstico",
+            "description": "Protección balanceada ideal para uso familiar",
+            "settings": {
+                "detectors": {
+                    "behavior_detector": {
+                        "enabled": true,
+                        "cpu_threshold": 75,
+                        "memory_threshold_mb": 200,
+                        "scan_interval": 3
+                    },
+                    "ml_detector": {
+                        "enabled": true,
+                        "confidence_threshold": 0.6
+                    },
+                    "network_detector": {
+                        "enabled": true
+                    }
+                },
+                "alerts": {
+                    "desktop_notifications": true,
+                    "sound_alerts": false,
+                    "email_alerts": false,
+                    "min_severity": "medium"
+                },
+                "monitoring": {
+                    "monitor_new_processes": true,
+                    "track_process_tree": true
+                },
+                "ui": {
+                    "theme": "default",
+                    "update_interval_ms": 2000,
+                    "show_graphs": true
+                }
+            },
+            "advantages": [
+                "Protección efectiva sin interrupciones",
+                "Equilibrio perfecto entre seguridad y usabilidad",
+                "Ideal para usuarios no técnicos",
+                "Consume pocos recursos del sistema"
+            ]
+        },
+        "office": {
+            "name": "Uso Empresarial", 
+            "description": "Máxima seguridad para entornos de trabajo",
+            "settings": {
+                "detectors": {
+                    "behavior_detector": {
+                        "enabled": true,
+                        "cpu_threshold": 85,
+                        "memory_threshold_mb": 150,
+                        "scan_interval": 2
+                    },
+                    "ml_detector": {
+                        "enabled": true,
+                        "confidence_threshold": 0.8
+                    },
+                    "network_detector": {
+                        "enabled": true
+                    }
+                },
+                "alerts": {
+                    "desktop_notifications": true,
+                    "sound_alerts": true,
+                    "email_alerts": false,
+                    "min_severity": "high"
+                },
+                "monitoring": {
+                    "monitor_new_processes": true,
+                    "track_process_tree": true
+                },
+                "ui": {
+                    "theme": "default",
+                    "update_interval_ms": 1000,
+                    "show_graphs": true
+                }
+            },
+            "advantages": [
+                "Máximo nivel de protección",
+                "Alertas inmediatas de amenazas",
+                "Ideal para datos sensibles",
+                "Monitoreo exhaustivo del sistema"
+            ]
+        },
+        "gaming": {
+            "name": "Gaming",
+            "description": "Mínimo impacto en rendimiento para juegos",
+            "settings": {
+                "detectors": {
+                    "behavior_detector": {
+                        "enabled": true,
+                        "cpu_threshold": 90,
+                        "memory_threshold_mb": 300,
+                        "scan_interval": 5
+                    },
+                    "ml_detector": {
+                        "enabled": false,
+                        "confidence_threshold": 0.9
+                    },
+                    "network_detector": {
+                        "enabled": false
+                    }
+                },
+                "alerts": {
+                    "desktop_notifications": false,
+                    "sound_alerts": false,
+                    "email_alerts": false,
+                    "min_severity": "critical"
+                },
+                "monitoring": {
+                    "monitor_new_processes": false,
+                    "track_process_tree": false
+                },
+                "ui": {
+                    "theme": "dark",
+                    "update_interval_ms": 3000,
+                    "show_graphs": false
+                }
+            },
+            "advantages": [
+                "Mínimo impacto en FPS",
+                "Sin interrupciones durante juegos",
+                "Protección básica pero efectiva",
+                "Optimizado para rendimiento"
+            ]
+        }
+    },
+    "validation_rules": {
+        "cpu_threshold": {
+            "min": 50,
+            "max": 95,
+            "default": 75,
+            "warning_below": 60,
+            "warning_above": 90
+        },
+        "memory_threshold_mb": {
+            "min": 100,
+            "max": 500,
+            "default": 200,
+            "warning_below": 150,
+            "warning_above": 400
+        },
+        "ml_confidence": {
+            "min": 0.3,
+            "max": 0.95,
+            "default": 0.7,
+            "recommended_min": 0.6,
+            "recommended_max": 0.8
+        },
+        "scan_interval": {
+            "min": 1,
+            "max": 10,
+            "default": 3,
+            "performance_impact": {
+                "1": "Alto impacto, máxima protección",
+                "2": "Impacto moderado, buena protección", 
+                "3": "Balanceado (recomendado)",
+                "5": "Bajo impacto, protección básica",
+                "10": "Mínimo impacto, protección mínima"
+            }
+        }
+    },
+    "safety_checks": {
+        "dangerous_combinations": [
+            {
+                "condition": "all_detectors_disabled",
+                "message": "⚠️ ADVERTENCIA: Todos los detectores están deshabilitados. Tu sistema no tendrá protección.",
+                "severity": "critical"
+            },
+            {
+                "condition": "very_high_sensitivity",
+                "message": "⚠️ Los umbrales muy bajos pueden causar muchas falsas alarmas.",
+                "severity": "warning"
+            },
+            {
+                "condition": "no_alerts_enabled",
+                "message": "⚠️ Sin alertas habilitadas, no te enterarás de amenazas detectadas.",
+                "severity": "warning"
+            }
+        ],
+        "recommended_minimums": {
+            "at_least_one_detector": true,
+            "at_least_desktop_alerts": true,
+            "max_scan_interval": 5,
+            "min_ml_confidence": 0.5
+        }
+    },
+    "user_experience": {
+        "beginner_mode": {
+            "hide_advanced_options": true,
+            "show_only_profiles": true,
+            "require_confirmation": true,
+            "provide_explanations": true
+        },
+        "expert_mode": {
+            "show_all_options": true,
+            "allow_dangerous_configs": true,
+            "minimal_confirmations": false,
+            "detailed_controls": true
+        },
+        "tooltips": {
+            "behavior_detector": "Vigila cómo se comportan los programas para detectar actividades sospechosas",
+            "ml_detector": "Usa inteligencia artificial entrenada para reconocer keyloggers automáticamente",
+            "network_detector": "Monitorea conexiones de red para detectar transmisión de datos robados",
+            "cpu_threshold": "Porcentaje de uso de procesador que considera sospechoso",
+            "memory_threshold": "Cantidad de memoria que considera uso excesivo",
+            "ml_confidence": "Qué tan seguro debe estar la IA antes de alertar (más alto = menos falsas alarmas)"
+        }
+    }
+}

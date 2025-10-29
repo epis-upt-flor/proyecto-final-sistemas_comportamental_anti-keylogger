@@ -1,0 +1,107 @@
+{
+    "ui_config": {
+        "theme": "default",
+        "window_size": "1400x900",
+        "update_interval_ms": 1000,
+        "show_notifications": true,
+        "show_graphs": true,
+        "auto_refresh": true,
+        "max_log_entries": 1000
+    },
+    "display_settings": {
+        "show_system_stats": true,
+        "show_threat_history": true,
+        "show_plugin_status": true,
+        "show_configuration": true,
+        "threat_alert_duration": 5000,
+        "status_bar_updates": true
+    },
+    "themes": {
+        "default": {
+            "bg_color": "#f0f0f0",
+            "fg_color": "#000000",
+            "accent_color": "#0078d4"
+        },
+        "dark": {
+            "bg_color": "#2c3e50",
+            "fg_color": "#ecf0f1",
+            "accent_color": "#3498db"
+        },
+        "light": {
+            "bg_color": "#ffffff",
+            "fg_color": "#333333",
+            "accent_color": "#007acc"
+        }
+    },
+    "layout": {
+        "main_tabs": [
+            {
+                "name": "monitoring",
+                "title": "📊 Monitoreo",
+                "enabled": true
+            },
+            {
+                "name": "threats",
+                "title": "🚨 Amenazas",
+                "enabled": true
+            },
+            {
+                "name": "plugins",
+                "title": "🔌 Plugins",
+                "enabled": true
+            },
+            {
+                "name": "configuration",
+                "title": "⚙️ Configuración",
+                "enabled": true
+            }
+        ],
+        "control_panel": {
+            "show_start_scan": true,
+            "show_stop_system": true,
+            "show_manual_refresh": true,
+            "show_status_indicator": true
+        }
+    },
+    "graphs": {
+        "cpu_graph": {
+            "enabled": true,
+            "update_interval": 2000,
+            "history_length": 60
+        },
+        "memory_graph": {
+            "enabled": true,
+            "update_interval": 2000,
+            "history_length": 60
+        },
+        "threat_timeline": {
+            "enabled": true,
+            "show_severity_colors": true,
+            "max_entries": 100
+        }
+    },
+    "alerts": {
+        "popup_alerts": {
+            "enabled": true,
+            "auto_close_delay": 10000,
+            "show_technical_details": true
+        },
+        "status_alerts": {
+            "enabled": true,
+            "flash_duration": 3000,
+            "color_coding": true
+        }
+    },
+    "accessibility": {
+        "high_contrast": false,
+        "large_fonts": false,
+        "screen_reader_support": false,
+        "keyboard_navigation": true
+    },
+    "performance": {
+        "ui_thread_priority": "normal",
+        "max_concurrent_updates": 3,
+        "lazy_loading": true,
+        "cache_ui_elements": true
+    }
+}
