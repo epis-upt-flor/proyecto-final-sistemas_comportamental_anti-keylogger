@@ -1,0 +1,69 @@
+@startuml UNIFIED_ANTIVIRUS_SimpleFlow
+!theme aws-orange
+title Flujo Simplificado - Detección de Keyloggers
+
+start
+
+:🛡️ **Sistema Iniciado**\nMonitoreo Activo;
+
+:👁️ **Escaneo Continuo**\nAnálisis cada 2 segundos;
+
+partition "🔍 **4 Detectores Trabajando**" {
+    :🧠 **IA Analiza**\n47 características;
+    :👁️ **Comportamiento**\nCPU, RAM, I/O;
+    :🌐 **Red Monitorea**\nConexiones sospechosas;
+    :🔍 **Firmas**\nKeyloggers conocidos;
+}
+
+:🎯 **Análisis Conjunto**\nCombinar resultados;
+
+if (¿Amenaza Detectada?) then (❌ NO)
+    :✅ **Proceso Seguro**\nContinuar monitoreo;
+else (⚠️ SÍ)
+    :🚨 **ALERTA GENERADA**\nNotificación al usuario;
+    
+    :👤 **Usuario Decide**\nAcción a tomar;
+    
+    if (¿Qué acción?) then (🛑 BLOQUEAR)
+        :🛑 **Terminar Proceso**\nAgregar a lista negra;
+        :📝 **Log de Seguridad**\nRegistrar amenaza;
+    elseif (📦 CUARENTENA) then
+        :📦 **Aislar Archivo**\nAnálisis posterior;
+        :🔬 **Análisis Profundo**\nGenerار reporte;
+    elseif (✅ PERMITIR) then
+        :✅ **Lista Blanca**\nMarcar como seguro;
+        :📋 **Actualizar Config**\nEvitar futuras alertas;
+    endif
+endif
+
+:📊 **Generar Estadísticas**\nActualizar dashboard;
+
+:⏰ **Esperar Intervalo**\n(2 segundos);
+
+stop
+
+note right
+  **Características del Sistema:**
+  
+  🧠 **Inteligencia Artificial**
+  • Modelo ONNX entrenado
+  • 85% de precisión
+  • Análisis en tiempo real
+  
+  👁️ **Análisis de Comportamiento**
+  • Patrones de CPU/RAM
+  • Hooks del sistema
+  • Anomalías de I/O
+  
+  🌐 **Monitoreo de Red**
+  • Conexiones sospechosas
+  • Puertos no autorizados
+  • Transferencia de datos
+  
+  🔍 **Detección de Firmas**
+  • Base de datos actualizada
+  • Heurísticas avanzadas
+  • API hooks maliciosos
+end note
+
+@enduml

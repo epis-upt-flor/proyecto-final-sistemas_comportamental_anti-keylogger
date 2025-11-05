@@ -8,11 +8,12 @@ import subprocess
 import sys
 import importlib.util
 
+
 def install_package(package_name, import_name=None):
     """Instala un paquete si no está disponible"""
     if import_name is None:
         import_name = package_name
-    
+
     try:
         # Verificar si el paquete está instalado
         spec = importlib.util.find_spec(import_name)
@@ -21,7 +22,7 @@ def install_package(package_name, import_name=None):
             return True
     except ImportError:
         pass
-    
+
     # Instalar el paquete
     try:
         print(f"📦 Instalando {package_name}...")
@@ -32,29 +33,32 @@ def install_package(package_name, import_name=None):
         print(f"❌ Error instalando {package_name}: {e}")
         return False
 
+
 def main():
     """Instala todas las dependencias necesarias"""
     print("🛡️ Instalador de Dependencias - Sistema Anti-Keylogger")
     print("=" * 60)
-    
+
     # Lista de dependencias
     dependencies = [
         ("matplotlib", "matplotlib"),
         ("psutil", "psutil"),
-        ("numpy", "numpy")
+        ("numpy", "numpy"),
     ]
-    
+
     success_count = 0
     total_count = len(dependencies)
-    
+
     for package_name, import_name in dependencies:
         if install_package(package_name, import_name):
             success_count += 1
         print()
-    
+
     print("=" * 60)
-    print(f"📊 Resumen: {success_count}/{total_count} dependencias instaladas correctamente")
-    
+    print(
+        f"📊 Resumen: {success_count}/{total_count} dependencias instaladas correctamente"
+    )
+
     if success_count == total_count:
         print("🎉 ¡Todas las dependencias están listas!")
         print("   Ahora puedes ejecutar el sistema con: python launcher.py")
@@ -62,6 +66,7 @@ def main():
         print("⚠️ Algunas dependencias fallaron. Intenta instalar manualmente:")
         for package_name, _ in dependencies:
             print(f"   pip install {package_name}")
+
 
 if __name__ == "__main__":
     main()

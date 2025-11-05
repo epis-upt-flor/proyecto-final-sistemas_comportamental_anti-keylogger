@@ -1,0 +1,77 @@
+@startuml UNIFIED_ANTIVIRUS_Sequence
+!theme aws-orange
+title Flujo de Detección de Amenazas - UNIFIED ANTIVIRUS
+
+actor "👤 Usuario" as User
+participant "🖥️ Dashboard" as UI
+participant "🏛️ Engine" as Engine
+participant "🎛️ Plugin Manager" as PM
+participant "🧠 ML Detector" as ML
+participant "👁️ Behavior Detector" as BD
+participant "🌐 Network Detector" as ND
+participant "🔍 Keylogger Detector" as KD
+participant "📡 Event Bus" as EB
+participant "🎯 Decision Engine" as DE
+participant "🚨 Alert Manager" as AM
+
+User -> UI: Iniciar Protección
+UI -> Engine: start_system()
+Engine -> PM: load_plugins()
+
+PM -> ML: initialize()
+PM -> BD: initialize() 
+PM -> ND: initialize()
+PM -> KD: initialize()
+
+note over ML, KD: **Detectores Inicializados**\nMonitoreo en tiempo real
+
+loop Monitoreo Continuo
+    
+    ML -> EB: scan_process(process_info)
+    BD -> EB: analyze_behavior(cpu, memory, io)
+    ND -> EB: monitor_connections(network_data)
+    KD -> EB: check_signatures(process_hooks)
+    
+    note over EB: **Event Bus**\nCentraliza comunicación
+    
+    EB -> DE: aggregate_results()
+    
+    alt Proceso Normal (Sin Amenaza)
+        DE -> EB: threat_level: LOW
+        EB -> UI: status: PROTECTED ✅
+        
+    else Actividad Sospechosa Detectada
+        DE -> DE: calculate_threat_score()
+        
+        alt Amenaza Confirmada (Score > 80%)
+            DE -> AM: trigger_alert(CRITICAL)
+            AM -> UI: show_threat_dialog() 🚨
+            AM -> User: notification_popup()
+            
+            User -> UI: select_action()
+            
+            alt Usuario: Bloquear
+                UI -> Engine: block_process()
+                Engine -> PM: terminate_threat()
+                
+            else Usuario: Cuarentena
+                UI -> Engine: quarantine_file()
+                Engine -> PM: isolate_threat()
+                
+            else Usuario: Lista Blanca
+                UI -> Engine: whitelist_process()
+                Engine -> PM: add_to_whitelist()
+            end
+            
+        else Sospechoso pero no Crítico (Score 50-80%)
+            DE -> AM: trigger_alert(WARNING)
+            AM -> UI: show_warning() ⚠️
+            
+        end
+    end
+    
+    note over ML, AM: **Análisis cada 2 segundos**
+    
+end
+
+@enduml

@@ -1,0 +1,126 @@
+# 🎯 Advanced Keylogger Detector - Configuración Mejorada
+# ========================================================
+# 
+# Detector especializado para keyloggers con múltiples capas de detección
+# Incluye ML, análisis de comportamiento y detección avanzada
+
+name: "Advanced Keylogger Detector"
+description: "Detector avanzado de keyloggers con ML y análisis comportamental"
+priority: 95  # Alta prioridad
+threshold: 0.7  # Threshold más estricto
+
+# ML Integration
+ml_config:
+  model_path: "models/keylogger_model_large_20250918_112840.onnx"
+  features: ["hooking_apis_count_normalized", "cpu_usage_raw_normalized", "network_risk_score_normalized"]
+  ml_threshold: 0.8
+  confidence_threshold: 0.85
+
+# Triggers Avanzados - Múltiples capas de detección
+triggers:
+  # Capa 1: API Hooking Detection
+  - condition: "api_call"
+    value: "SetWindowsHookExW"
+    weight: 3.0
+    description: "Hook de teclado principal"
+    
+  - condition: "api_call"
+    value: "SetWindowsHookExA" 
+    weight: 2.5
+    description: "Hook de teclado alternativo"
+    
+  - condition: "api_call"
+    value: "GetAsyncKeyState"
+    weight: 2.0
+    description: "Lectura directa de teclas"
+    
+  # Capa 2: Behavioral Analysis  
+  - condition: "process_behavior"
+    value: "hidden_window"
+    weight: 2.0
+    description: "Proceso con ventana oculta"
+    
+  - condition: "file_activity"
+    value: "log_creation"
+    weight: 1.5
+    description: "Creación de archivos de log sospechosos"
+    
+  # Capa 3: Network Analysis
+  - condition: "network_activity"
+    value: "data_exfiltration"
+    weight: 2.5
+    description: "Envío de datos capturados"
+    
+  - condition: "network_connections"
+    value: "suspicious_ports"
+    weight: 1.5
+    description: "Conexiones a puertos no estándar"
+    
+  # Capa 4: System Integration
+  - condition: "registry_access"
+    value: "autostart_keys"
+    weight: 1.8
+    description: "Modificación de claves de autoarranque"
+    
+  - condition: "cpu_usage"
+    value: 15  # Keyloggers suelen ser de bajo consumo
+    weight: 1.0
+    description: "Uso de CPU constante pero bajo"
+
+# Respuestas Escalonadas - Según severidad
+responses:
+  # Nivel 1: Detección inicial
+  - action: "log"
+    level: "info"
+    condition: "score >= 0.3"
+    message: "Actividad sospechosa de keylogger detectada"
+    
+  # Nivel 2: Sospecha moderada  
+  - action: "alert"
+    level: "warning"
+    condition: "score >= 0.5"
+    message: "Probable keylogger - investigación requerida"
+    
+  # Nivel 3: Alta confianza
+  - action: "alert"
+    level: "critical"
+    condition: "score >= 0.7"
+    message: "KEYLOGGER CONFIRMADO - Acción inmediata requerida"
+    
+  # Nivel 4: ML Confirmation
+  - action: "quarantine"
+    level: "critical"
+    condition: "ml_confirmed == true"
+    message: "Keylogger confirmado por ML - Cuarentena automática"
+    
+  # Nivel 5: Respuesta avanzada
+  - action: "forensics"
+    level: "critical" 
+    condition: "score >= 0.8"
+    message: "Captura forense de keylogger para análisis"
+    
+  - action: "network_block"
+    level: "high"
+    condition: "network_activity == suspicious"
+    message: "Bloqueo de conexiones de red del proceso"
+
+# Configuraciones Avanzadas
+advanced_config:
+  # Análisis temporal
+  time_window: 300  # 5 minutos de análisis
+  sample_frequency: 10  # Muestreo cada 10 segundos
+  
+  # Machine Learning
+  ml_enabled: true
+  ml_realtime: true
+  feature_extraction_interval: 30
+  
+  # Forensics
+  capture_screenshots: true
+  log_keystrokes_sample: true  # Para evidencia (encriptado)
+  memory_dump: true
+  
+  # Performance
+  max_cpu_usage: 5  # Límite de CPU para el detector
+  cache_results: true
+  cache_duration: 3600  # 1 hora

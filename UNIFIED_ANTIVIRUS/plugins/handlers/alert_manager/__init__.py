@@ -2,4 +2,4 @@
 
 from .plugin import AlertManagerPlugin
 
-__all__ = ['AlertManagerPlugin']
+__all__ = ["AlertManagerPlugin"]

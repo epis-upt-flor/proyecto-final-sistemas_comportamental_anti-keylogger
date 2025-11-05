@@ -1,0 +1,137 @@
+@startuml UNIFIED_ANTIVIRUS_Architecture
+!theme aws-orange
+title UNIFIED ANTIVIRUS - Arquitectura del Sistema Anti-Keylogger
+
+' Definir colores y estilos
+skinparam backgroundColor #F8F9FA
+skinparam package {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontColor #1976D2
+    FontSize 12
+}
+skinparam component {
+    BackgroundColor #FFF3E0
+    BorderColor #F57C00
+    FontColor #E65100
+}
+skinparam interface {
+    BackgroundColor #E8F5E8
+    BorderColor #4CAF50
+    FontColor #2E7D32
+}
+skinparam actor {
+    BackgroundColor #FCE4EC
+    BorderColor #E91E63
+    FontColor #C2185B
+}
+
+' Actores
+actor "👤 Usuario" as User
+
+' Capa de Presentación
+package "💻 INTERFAZ DE USUARIO" as UI {
+    component "🖥️ GUI Dashboard" as Dashboard
+    component "📊 Análisis & Gráficos" as Analytics
+    component "⚙️ Configuración" as Config
+    component "📱 CLI Interface" as CLI
+}
+
+' Capa de Control Principal
+package "🏛️ MOTOR PRINCIPAL (ENGINE)" as Engine {
+    component "🎭 Unified Engine\n(Facade Pattern)" as MainEngine
+    component "📡 Event Bus\n(Observer Pattern)" as EventBus
+    component "🎛️ Plugin Manager\n(Factory Pattern)" as PluginManager
+    component "📋 Plugin Registry" as Registry
+}
+
+' Capa de Detectores
+package "🔍 DETECTORES ESPECIALIZADOS" as Detectors {
+    component "🧠 ML Detector\n• Modelo ONNX\n• 47 Features\n• 85% Precisión" as MLDetector
+    component "👁️ Behavior Detector\n• CPU/RAM Usage\n• I/O Patterns\n• Process Hooks" as BehaviorDetector
+    component "🌐 Network Detector\n• Conexiones\n• Puertos\n• Traffic DPI" as NetworkDetector
+    component "🔍 Keylogger Detector\n• Firmas Malware\n• API Hooks\n• Heurísticas" as KeyloggerDetector
+}
+
+' Capa de Decisión
+package "🎯 SISTEMA DE DECISIÓN" as Decision {
+    component "📊 Threat Analyzer\n(Strategy Pattern)" as ThreatAnalyzer
+    component "⚖️ Decision Engine" as DecisionEngine
+    component "🧮 Scoring System" as ScoringSystem
+}
+
+' Capa de Respuesta
+package "🚨 SISTEMA DE RESPUESTA" as Response {
+    component "🚨 Alert Manager" as AlertManager
+    component "🛑 Process Blocker" as ProcessBlocker
+    component "📦 Quarantine System" as QuarantineSystem
+    component "📊 Report Generator" as ReportGenerator
+}
+
+' Configuración
+package "⚙️ CONFIGURACIÓN & PERFILES" as Configuration {
+    component "🏠 Perfil Doméstico" as HomeProfile
+    component "🏢 Perfil Empresarial" as BusinessProfile
+    component "🎮 Perfil Gaming" as GamingProfile
+    component "🔧 Configuración Custom" as CustomConfig
+}
+
+' Conexiones principales
+User --> UI
+UI --> MainEngine
+
+MainEngine --> EventBus
+MainEngine --> PluginManager
+PluginManager --> Registry
+
+' Conectar detectores
+PluginManager --> MLDetector
+PluginManager --> BehaviorDetector
+PluginManager --> NetworkDetector
+PluginManager --> KeyloggerDetector
+
+' Flujo de datos hacia decisión
+MLDetector --> ThreatAnalyzer
+BehaviorDetector --> ThreatAnalyzer
+NetworkDetector --> ThreatAnalyzer
+KeyloggerDetector --> ThreatAnalyzer
+
+ThreatAnalyzer --> DecisionEngine
+DecisionEngine --> ScoringSystem
+
+' Sistema de respuesta
+DecisionEngine --> AlertManager
+DecisionEngine --> ProcessBlocker
+DecisionEngine --> QuarantineSystem
+DecisionEngine --> ReportGenerator
+
+' Configuración
+Configuration --> MainEngine
+
+' Event Bus connections (bidireccionales)
+EventBus <--> ThreatAnalyzer
+EventBus <--> AlertManager
+EventBus <--> Dashboard
+
+note right of MainEngine
+  **Facade Pattern**
+  - Simplifica interfaz compleja
+  - Coordina todos los componentes
+  - Punto de entrada único
+end note
+
+note bottom of ThreatAnalyzer
+  **Análisis Inteligente**
+  - Combina 4 detectores
+  - Scoring ponderado
+  - Decisión por consenso
+end note
+
+note left of MLDetector
+  **Inteligencia Artificial**
+  - Red neuronal entrenada
+  - Análisis de 47 características
+  - Inferencia en tiempo real
+end note
+
+@enduml

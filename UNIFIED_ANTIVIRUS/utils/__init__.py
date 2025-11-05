@@ -7,13 +7,8 @@ the antivirus system.
 """
 
 from .logger import Logger
-from .file_utils import FileUtils  
+from .file_utils import FileUtils
 from .system_utils import SystemUtils
 from .security_utils import SecurityUtils
 
-__all__ = [
-    'Logger',
-    'FileUtils', 
-    'SystemUtils',
-    'SecurityUtils'
-]
+__all__ = ["Logger", "FileUtils", "SystemUtils", "SecurityUtils"]

@@ -2,4 +2,4 @@
 
 from .plugin import LoggerHandlerPlugin
 
-__all__ = ['LoggerHandlerPlugin']
+__all__ = ["LoggerHandlerPlugin"]

@@ -1,0 +1,138 @@
+@startuml UNIFIED_ANTIVIRUS_Components
+!theme aws-orange
+title Diagrama de Componentes Detallado - UNIFIED ANTIVIRUS
+
+skinparam component {
+    BackgroundColor #FFF3E0
+    BorderColor #F57C00
+    FontColor #E65100
+    FontSize 11
+}
+
+skinparam package {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    FontColor #1976D2
+    FontSize 12
+    FontStyle bold
+}
+
+' Interfaces principales
+interface "IDetector" as IDetector
+interface "IPlugin" as IPlugin
+interface "IEventHandler" as IEventHandler
+interface "INotification" as INotification
+
+' Core Components
+package "🏛️ CORE" {
+    [🎭 UnifiedEngine] as Engine
+    [📡 EventBus] as EventBus
+    [🎛️ PluginManager] as PluginManager
+    [📋 PluginRegistry] as Registry
+    [🔧 ConfigManager] as ConfigManager
+}
+
+' UI Components
+package "💻 INTERFACES" {
+    [🖥️ ProfessionalUI] as GUI
+    [📱 LauncherCLI] as CLI
+    [📊 AnalyticsView] as Analytics
+    [⚙️ ConfigurationPanel] as ConfigPanel
+}
+
+' Detector Plugins
+package "🔍 DETECTORS" {
+    [🧠 MLDetector] as MLDetector
+    [👁️ BehaviorDetector] as BehaviorDetector  
+    [🌐 NetworkDetector] as NetworkDetector
+    [🔍 KeyloggerDetector] as KeyloggerDetector
+}
+
+' Handler Plugins
+package "🚨 HANDLERS" {
+    [🚨 AlertHandler] as AlertHandler
+    [🛑 ProcessBlocker] as ProcessBlocker
+    [📦 QuarantineHandler] as QuarantineHandler
+    [📧 EmailNotifier] as EmailNotifier
+}
+
+' Monitor Plugins
+package "👁️ MONITORS" {
+    [📊 SystemMonitor] as SystemMonitor
+    [🔒 FileWatcher] as FileWatcher
+    [🌐 NetworkMonitor] as NetworkMonitor
+    [📈 PerformanceMonitor] as PerformanceMonitor
+}
+
+' External Dependencies
+package "🔗 EXTERNAL" {
+    [🤖 ONNX Runtime] as ONNX
+    [💾 SQLite DB] as Database
+    [📁 File System] as FileSystem
+    [🌐 Windows API] as WinAPI
+}
+
+' Implementaciones de interfaces
+MLDetector ..|> IDetector
+BehaviorDetector ..|> IDetector
+NetworkDetector ..|> IDetector
+KeyloggerDetector ..|> IDetector
+
+AlertHandler ..|> IEventHandler
+ProcessBlocker ..|> IEventHandler
+QuarantineHandler ..|> IEventHandler
+
+AlertHandler ..|> INotification
+EmailNotifier ..|> INotification
+
+' Conexiones principales
+GUI --> Engine
+CLI --> Engine
+Engine --> PluginManager
+Engine --> EventBus
+Engine --> ConfigManager
+
+PluginManager --> Registry
+PluginManager --> MLDetector
+PluginManager --> BehaviorDetector
+PluginManager --> NetworkDetector
+PluginManager --> KeyloggerDetector
+
+PluginManager --> AlertHandler
+PluginManager --> ProcessBlocker
+PluginManager --> QuarantineHandler
+
+EventBus --> AlertHandler
+EventBus --> GUI
+EventBus --> Analytics
+
+' Dependencias externas
+MLDetector --> ONNX
+Engine --> Database
+FileWatcher --> FileSystem
+NetworkDetector --> WinAPI
+BehaviorDetector --> WinAPI
+
+' Configuración
+ConfigManager --> ConfigPanel
+ConfigManager --> Database
+
+note as N1
+**Patrones Implementados:**
+• Facade Pattern (Engine)
+• Observer Pattern (EventBus)
+• Factory Pattern (PluginManager)
+• Strategy Pattern (Detectores)
+• Command Pattern (Handlers)
+end note
+
+note as N2
+**Características Clave:**
+• Arquitectura Plugin-based
+• Comunicación desacoplada
+• Extensibilidad modular
+• Threading asíncrono
+• Configuración dinámica
+end note
+
+@enduml
