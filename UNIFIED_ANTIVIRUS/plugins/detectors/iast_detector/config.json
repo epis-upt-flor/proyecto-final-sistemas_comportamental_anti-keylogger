@@ -1,0 +1,67 @@
+{
+  "name": "IAST Self-Protection & Keylogger Detector",
+  "version": "1.0.0",
+  "description": "Interactive Application Security Testing for antivirus self-protection and specialized keylogger detection",
+  "type": "detector",
+  "priority": 95,
+  "capabilities": [
+    "self_protection",
+    "keylogger_detection", 
+    "integrity_monitoring",
+    "hybrid_analysis",
+    "threat_logging"
+  ],
+  "settings": {
+    "monitoring_enabled": true,
+    "scan_interval": 30,
+    "detection_threshold": 0.7,
+    "static_weight": 0.6,
+    "dynamic_weight": 0.4,
+    "protected_files": [
+      "core/engine.py",
+      "utils/logger.py", 
+      "plugins/detectors/ml_detector/ml_engine.py",
+      "config/security_config.json",
+      "config/unified_config.toml",
+      "web_system/integration/web_log_handler.py"
+    ],
+    "keylogger_signatures": {
+      "api_calls": [
+        "SetWindowsHookExA", 
+        "SetWindowsHookExW",
+        "GetAsyncKeyState", 
+        "GetKeyState", 
+        "RegisterHotKey"
+      ],
+      "suspicious_terms": [
+        "keylog", 
+        "keystroke", 
+        "password", 
+        "capture",
+        "stealer", 
+        "logger", 
+        "hook"
+      ]
+    },
+    "alert_levels": {
+      "integrity_compromise": "HIGH",
+      "keylogger_detection": "CRITICAL",
+      "suspicious_activity": "MEDIUM"
+    }
+  },
+  "dependencies": {
+    "python_modules": ["psutil", "hashlib", "threading"],
+    "system_requirements": ["Windows API access", "Process monitoring permissions"]
+  },
+  "logging": {
+    "level": "INFO",
+    "structured_output": true,
+    "web_integration": true,
+    "events_to_log": [
+      "file_integrity_check",
+      "keylogger_detection", 
+      "threat_analysis",
+      "security_events"
+    ]
+  }
+}

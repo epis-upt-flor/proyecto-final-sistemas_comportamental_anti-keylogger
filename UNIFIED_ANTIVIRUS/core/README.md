@@ -780,7 +780,28 @@ El core recopila métricas:
 - Errores en activación de plugins
 - Latencia de eventos
 
+## 🔗 **Enlaces Relacionados**
+
+### Componentes del Sistema
+- **[📋 README Principal](../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../plugins/README.md)** - Arquitectura de plugins que gestiona
+- **[🔍 Detectores](../plugins/detectors/README.md)** - Plugins de detección coordinados
+- **[👁️ Monitores](../plugins/monitors/README.md)** - Plugins de monitoreo gestionados
+- **[🚨 Handlers](../plugins/handlers/README.md)** - Plugins de respuesta controlados
+- **[⚙️ Configuración](../config/README.md)** - Sistema de configuración usado por engine
+- **[📝 Logs](../logs/README.md)** - Sistema de logging coordinado
+- **[🛠️ Utils](../utils/README.md)** - Utilidades usadas por componentes core
+
+### Documentación Técnica
+- **[🏗️ Interfaces](interfaces.py)** - Definiciones de interfaces del sistema
+- **[🚀 Engine](engine.py)** - Motor principal y facade del sistema
+- **[📡 Event Bus](event_bus.py)** - Sistema de comunicación entre plugins
+- **[🔌 Plugin Manager](plugin_manager.py)** - Gestor de ciclo de vida de plugins
+- **[📝 Base Plugin](base_plugin.py)** - Clase base para todos los plugins
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../README.md) - Motor Principal del Sistema**
 
 **Versión**: 2.0.0  
 **Última actualización**: Noviembre 2025

@@ -680,7 +680,26 @@ plugin.reload_config()
 event_bus.publish('reload_config', {'plugin': 'ml_detector'}, 'system')
 ```
 
+## 📚 **Documentación Relacionada**
+
+### Guías de Configuración
+- **[📖 GUIA_USUARIO_CONFIGURACION.md](GUIA_USUARIO_CONFIGURACION.md)** - Guía completa del usuario
+- **[📖 README_CONFIGURACION.md](README_CONFIGURACION.md)** - Documentación técnica adicional
+
+### Enlaces del Sistema
+- **[📋 README Principal](../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../plugins/README.md)** - Configuración de plugins
+- **[🔍 Detectores](../plugins/detectors/README.md)** - Configuración de detectores
+- **[👁️ Monitores](../plugins/monitors/README.md)** - Configuración de monitoreo
+- **[🚨 Handlers](../plugins/handlers/README.md)** - Configuración de respuesta
+- **[📊 Core Engine](../core/README.md)** - Motor principal y Event Bus
+- **[🤖 Modelos ML](../models/README.md)** - Configuración de machine learning
+- **[📝 Logs](../logs/README.md)** - Sistema de logging
+- **[🛠️ Utils](../utils/README.md)** - Utilidades del sistema
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../README.md) - Sistema de Configuración Centralizada**
 
 **Versión**: 2.0.0  
 **Última actualización**: Noviembre 2025

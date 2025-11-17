@@ -190,6 +190,18 @@ Para reportes de falsos positivos o keyloggers no detectados:
 - 🐛 Issues: GitHub Issues
 - 📖 Docs: Wiki del proyecto
 
+## 🔗 **Enlaces Relacionados**
+
+- **[📋 README Principal](../../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../../README.md)** - Arquitectura de plugins
+- **[🧠 Recursos Compartidos](../../shared/README.md)** - Motor de inteligencia unificado
+- **[🎯 Behavior Detector](../behavior_detector/README.md)** - Detector de comportamiento
+- **[🤖 ML Detector](../ml_detector/README.md)** - Detector con machine learning
+- **[🌐 Network Detector](../network_detector/README.md)** - Detector de red
+- **[⚙️ Configuración](../../../config/README.md)** - Sistema de configuración
+- **[� Core Engine](../../../core/README.md)** - Motor principal del sistema
+- **[🤖 Modelos ML](../../../models/README.md)** - Modelos de machine learning
+
 ---
 
-**Desarrollado con 💚 por KrCrimson Security Team**
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../../README.md) - Sistema de Detección Profesional**

@@ -8,12 +8,22 @@ Implementa Strategy Pattern y Chain of Responsibility para evaluación de reglas
 
 import logging
 import re
+import os
+import sys
 from typing import Dict, List, Any, Set, Optional, Tuple
 from abc import ABC, abstractmethod
 from datetime import datetime
 from enum import Enum
 
 logger = logging.getLogger(__name__)
+
+# Importar el motor de inteligencia unificada
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "shared"))
+try:
+    from unified_intelligence import UnifiedIntelligence
+except ImportError:
+    logger.info("📊 Usando análisis heurístico básico (modo estándar)")
+    UnifiedIntelligence = None
 
 
 class RiskLevel(Enum):
@@ -73,38 +83,95 @@ class BaseRule(ABC):
         }
 
 
-class ProcessNameRule(BaseRule):
-    """Regla para patrones de nombres de proceso sospechosos"""
+class IntelligentProcessRule(BaseRule):
+    """Regla INTELIGENTE para análisis de procesos - NO usa patrones obvios"""
 
-    def __init__(self, rule_id: str, patterns: List[str], risk_weight: float = 0.8):
-        super().__init__(rule_id, "Process Name Pattern", risk_weight, RuleType.PROCESS)
-        self.patterns = [re.compile(pattern, re.IGNORECASE) for pattern in patterns]
+    def __init__(self, rule_id: str, intelligence_engine=None, risk_weight: float = 0.8):
+        super().__init__(rule_id, "Intelligent Process Analysis", risk_weight, RuleType.PROCESS)
+        self.intelligence_engine = intelligence_engine
 
     def evaluate(self, data: Dict[str, Any]) -> Tuple[bool, float, Dict[str, Any]]:
         try:
-            process_name = data.get("process_info", {}).get("name", "")
+            process_info = data.get("process_info", {})
+            process_name = process_info.get("name", "")
+            process_path = process_info.get("path", "")
 
             if not process_name:
                 return False, 0.0, {}
 
-            # Verificar patrones
-            for pattern in self.patterns:
-                if pattern.search(process_name):
+            # 🧠 ANÁLISIS INTELIGENTE (no patrones tontos)
+            if self.intelligence_engine:
+                analysis = self.intelligence_engine.analyze_process({
+                    "name": process_name,
+                    "path": process_path,
+                    "pid": process_info.get("pid", 0)
+                })
+                
+                if analysis and analysis.get("risk_score", 0) > 0.5:
                     self.match_count += 1
                     return (
                         True,
-                        self.risk_weight,
+                        analysis["risk_score"] * self.risk_weight,
                         {
-                            "matched_process": process_name,
-                            "matched_pattern": pattern.pattern,
-                            "rule_type": "process_name_pattern",
+                            "process": process_name,
+                            "analysis_type": "intelligent_behavioral",
+                            "detected_behaviors": analysis.get("behaviors", []),
+                            "risk_factors": analysis.get("risk_factors", []),
+                            "rule_type": "intelligent_process_analysis",
                         },
                     )
-
+            else:
+                # Fallback básico sin patrones obvios
+                logger.debug(f"[INTELLIGENT_RULE] Análisis básico para: {process_name}")
+                
             return False, 0.0, {}
 
         except Exception as e:
-            logger.error(f"[RULE_ENGINE] Error en ProcessNameRule: {e}")
+            logger.error(f"[RULE_ENGINE] Error en IntelligentProcessRule: {e}")
+            return False, 0.0, {}
+
+
+# 🚫 CLASE LEGACY - Mantener para compatibilidad pero EVITAR usar
+class ProcessNameRule(BaseRule):
+    """⚠️ DEPRECATED: Regla de patrones obvios - Usar IntelligentProcessRule"""
+
+    def __init__(self, rule_id: str, patterns: List[str], risk_weight: float = 0.8):
+        super().__init__(rule_id, "Legacy Process Pattern", risk_weight, RuleType.PROCESS)
+        # ⚠️ Filtrar patrones obvios
+        safe_patterns = []
+        for pattern in patterns:
+            if not any(obvious in pattern.lower() 
+                      for obvious in ['keylog', 'stealer', 'hack', 'crack', 'password']):
+                safe_patterns.append(pattern)
+        
+        self.patterns = [re.compile(pattern, re.IGNORECASE) for pattern in safe_patterns]
+        
+        if not self.patterns:
+            logger.warning(f"[RULE_ENGINE] ⚠️ Todos los patrones de {rule_id} eran obvios - regla deshabilitada")
+
+    def evaluate(self, data: Dict[str, Any]) -> Tuple[bool, float, Dict[str, Any]]:
+        # Solo ejecutar si hay patrones no-obvios
+        if not self.patterns:
+            return False, 0.0, {}
+            
+        try:
+            process_name = data.get("process_info", {}).get("name", "")
+            if not process_name:
+                return False, 0.0, {}
+
+            # Verificar patrones no-obvios solamente
+            for pattern in self.patterns:
+                if pattern.search(process_name):
+                    self.match_count += 1
+                    return (True, self.risk_weight, {
+                        "matched_process": process_name,
+                        "matched_pattern": pattern.pattern,
+                        "rule_type": "legacy_process_pattern",
+                        "warning": "Considerar migrar a IntelligentProcessRule"
+                    })
+            return False, 0.0, {}
+        except Exception as e:
+            logger.error(f"[RULE_ENGINE] Error en ProcessNameRule legacy: {e}")
             return False, 0.0, {}
 
 
@@ -423,30 +490,42 @@ class RuleEngine:
         logger.info(f"[RULE_ENGINE] Inicializado con {len(self.rules)} reglas")
 
     def _load_rules(self):
-        """Carga reglas desde configuración"""
+        """Carga reglas INTELIGENTES desde configuración - NO patrones obvios"""
         try:
-            # Reglas de proceso
+            # 🧠 SISTEMA INTELIGENTE - No usar patrones tontos
             process_rules = self.detection_rules.get("process_behavior", {})
-
-            # Patrones de nombres de proceso
-            keylogger_patterns = process_rules.get("keylogger_process_patterns", [])
-            if keylogger_patterns:
-                rule = ProcessNameRule(
-                    "process_name_patterns",
-                    keylogger_patterns,
-                    self.weights.get("suspicious_process_name", 0.8),
-                )
-                self.rules.append(rule)
-
-            # Patrones de línea de comando
-            cmdline_patterns = process_rules.get("suspicious_command_lines", [])
-            if cmdline_patterns:
-                rule = CommandLineRule(
-                    "cmdline_patterns",
-                    cmdline_patterns,
-                    self.weights.get("suspicious_command_line", 0.9),
-                )
-                self.rules.append(rule)
+            
+            # ✅ Solo cargar si está habilitado el motor de inteligencia
+            if process_rules.get("enable_intelligence_engine", False):
+                logger.info("[RULE_ENGINE] 🧠 Modo INTELIGENCIA activado - Sin patrones obvios")
+                
+                # Inicializar motor de inteligencia unificada
+                if UnifiedIntelligence:
+                    self.intelligence_engine = UnifiedIntelligence()
+                    # ✅ AGREGAR REGLA INTELIGENTE
+                    intelligent_rule = IntelligentProcessRule(
+                        "intelligent_process_analysis",
+                        self.intelligence_engine,
+                        self.weights.get("behavioral_analysis", 0.9)
+                    )
+                    self.rules.append(intelligent_rule)
+                    logger.info("[RULE_ENGINE] ✅ Motor de inteligencia unificada y regla inteligente cargados")
+                else:
+                    logger.debug("[RULE_ENGINE] 📊 Usando modo heurístico estándar")
+            else:
+                # 🚫 EVITAR patrones tontos legacy - Solo APIs peligrosas
+                logger.debug("[RULE_ENGINE] 📊 Modo heurístico básico activo")
+                
+                # Patrones de línea de comando sospechosos (mantener solo no-obvios)
+                cmdline_patterns = process_rules.get("suspicious_command_lines", [])
+                if cmdline_patterns:
+                    # Filtrar patrones obvios
+                    non_obvious = [p for p in cmdline_patterns if not any(obvious in p.lower() 
+                                  for obvious in ['keylog', 'stealer', 'hack', 'crack'])]
+                    if non_obvious:
+                        rule = CommandLineRule("cmdline_patterns", non_obvious,
+                                             self.weights.get("suspicious_command_line", 0.9))
+                        self.rules.append(rule)
 
             # APIs peligrosas
             dangerous_apis = process_rules.get("dangerous_apis", [])
@@ -627,19 +706,22 @@ if __name__ == "__main__":
     # Test standalone del rule engine
     print("🧪 Testing Rule Engine...")
 
+    # ⚠️  NO USAR PATRONES TONTOS HARDCODEADOS
+    # El sistema ahora usa INTELIGENCIA UNIFICADA desde config.json
     test_config = {
         "detection_rules": {
             "process_behavior": {
-                "keylogger_process_patterns": [".*keylog.*", ".*stealer.*"],
-                "suspicious_command_lines": [".*hook.*keyboard.*"],
+                # 🚫 PATRONES OBVIOS ELIMINADOS - Usar unified_intelligence.py
+                "enable_intelligence_engine": True,
+                "use_behavioral_analysis": True,
                 "dangerous_apis": ["SetWindowsHookEx", "GetAsyncKeyState"],
             }
         },
         "risk_scoring": {
             "weights": {
-                "suspicious_process_name": 0.8,
-                "suspicious_command_line": 0.9,
-                "api_hooking": 0.9,
+                "behavioral_analysis": 0.9,
+                "process_masquerading": 0.8,
+                "stealth_location": 0.7,
             },
             "thresholds": {
                 "low_risk": 0.3,

@@ -75,7 +75,7 @@ class PluginRegistry:
 
             # Verificar si ya existe
             if name in cls._plugins:
-                logger.warning(f"⚠️ Plugin '{name}' ya registrado, sobrescribiendo")
+                logger.debug(f"🔄 Plugin '{name}' actualizado en registro")
 
             # Registrar plugin
             cls._plugins[name] = {
@@ -221,9 +221,10 @@ class PluginRegistry:
                                 discovered += 1
 
                     except Exception as e:
-                        logger.error(
-                            f"❌ Error importando plugin {plugin_dir.name}: {e}"
-                        )
+                        if "No module named" in str(e):
+                            logger.debug(f"⏭️ Plugin {plugin_dir.name} omitido - dependencias faltantes: {e}")
+                        else:
+                            logger.warning(f"⚠️ Error cargando plugin {plugin_dir.name}: {e}")
 
             logger.info(f"✅ Descubiertos {discovered} plugins")
             return discovered

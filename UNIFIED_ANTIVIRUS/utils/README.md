@@ -527,7 +527,33 @@ info = SystemUtils.get_system_info()
 assert info['memory']['total_gb'] > 0
 ```
 
+## 🔗 **Enlaces Relacionados**
+
+### Componentes que Usan Utils
+- **[📋 README Principal](../README.md)** - Navegación general del proyecto
+- **[📊 Core Engine](../core/README.md)** - Motor principal que usa estas utilidades
+- **[🔌 Sistema de Plugins](../plugins/README.md)** - Plugins que usan utilidades comunes
+- **[🔍 Detectores](../plugins/detectors/README.md)** - Detectores que usan utils
+- **[👁️ Monitores](../plugins/monitors/README.md)** - Monitores que usan system_utils
+- **[🚨 Handlers](../plugins/handlers/README.md)** - Handlers que usan logging y security
+
+### Sistemas Relacionados
+- **[📝 Logger Handler](../plugins/handlers/logger_handler/README.md)** - Sistema de logging avanzado
+- **[📝 Logs](../logs/README.md)** - Directorio de logs generados
+- **[⚙️ Configuración](../config/README.md)** - Configuración que usan las utilidades
+- **[🛡️ Threat Intelligence](../threat_intel/README.md)** - Usa security_utils para validación
+
+### Utilidades Específicas
+- **`logger.py`** - Sistema de logging estructurado y thread-safe
+- **`security_utils.py`** - Operaciones criptográficas y de seguridad
+- **`system_utils.py`** - Información y monitoreo del sistema operativo
+- **`file_utils.py`** - Manipulación segura de archivos y directorios
+- **`metrics_collector.py`** - Recolección de métricas del sistema
+- **`real_time_logs.py`** - Logging en tiempo real
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../README.md) - Utilidades Centralizadas del Sistema**
 
 **Versión**: 2.0.0  
 **Última actualización**: Noviembre 2025

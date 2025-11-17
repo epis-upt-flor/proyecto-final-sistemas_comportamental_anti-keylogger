@@ -1,70 +1,55 @@
 {
   "plugin_info": {
     "name": "keylogger_detector",
-    "version": "2.0.0",
-    "description": "Detector especializado de keyloggers basado en análisis de comportamiento real",
+    "version": "3.0.0",
+    "description": "Detector especializado INTELIGENTE - Análisis comportamental",
     "author": "KrCrimson",
     "category": "detector",
     "priority": "high"
   },
   "keylogger_detector": {
     "sensitivity": "high",
-    "monitor_hooks": true,
-    "monitor_files": true,
-    "monitor_stealth": true,
-    "detection_thresholds": {
-      "low": 0.8,
-      "medium": 0.6,
-      "high": 0.4,
-      "paranoid": 0.2
+    "use_unified_intelligence": true,
+    "behavioral_analysis": {
+      "process_masquerading": true,
+      "stealth_injection": true,
+      "memory_patterns": true,
+      "api_hooking_context": true
     },
-    "log_file_patterns": [
+    "detection_thresholds": {
+      "masquerading": 0.8,
+      "stealth_location": 0.7,
+      "behavioral": 0.6,
+      "combined": 0.7
+    },
+    "intelligent_apis": {
+      "context_aware": true,
+      "legitimate_use_filter": true,
+      "hook_apis": [
+        "SetWindowsHookEx",
+        "CallNextHookEx"
+      ],
+      "input_apis": [
+        "GetAsyncKeyState",
+        "GetKeyState"
+      ],
+      "window_apis": [
+        "GetForegroundWindow",
+        "GetWindowText"
+      ]
+    },
+    "advanced_whitelist": {
+      "process_verification": true,
+      "location_verification": true,
+      "publisher_verification": true
+    }
+  },
+  "legacy_detection_disabled": {
+    "note": "Patrones de archivo obvios reemplazados por análisis comportamental",
+    "old_patterns": [
       ".*key.*log.*\\.txt$",
-      ".*readme\\.txt$",
-      ".*text.*data.*\\.txt$",
-      ".*clipboard.*\\.txt$",
-      ".*system.*info.*\\.txt$",
-      ".*screenshot.*\\.(png|jpg)$",
-      ".*audio.*\\.(wav|mp3)$",
-      "^log.*\\.txt$",
       ".*keystroke.*\\.(txt|log)$"
     ],
-    "suspicious_apis": [
-      "SetWindowsHookEx",
-      "SetWindowsHookExW", 
-      "SetWindowsHookExA",
-      "CallNextHookEx",
-      "UnhookWindowsHookEx",
-      "GetAsyncKeyState",
-      "GetKeyState",
-      "RegisterHotKey"
-    ],
-    "stealth_apis": [
-      "ShowWindow",
-      "SetWindowPos",
-      "CreateMutex",
-      "WriteProcessMemory",
-      "VirtualAllocEx"
-    ],
-    "suspicious_directories": [
-      "temp",
-      "tmp", 
-      "appdata\\roaming",
-      "documents",
-      "downloads",
-      "desktop"
-    ]
-  },
-  "performance": {
-    "max_concurrent_analyses": 5,
-    "analysis_timeout_ms": 5000,
-    "cache_ttl_seconds": 300,
-    "memory_limit_mb": 50
-  },
-  "logging": {
-    "level": "INFO",
-    "log_detections": true,
-    "log_false_positives": true,
-    "detailed_analysis_logs": false
+    "replacement": "Behavioral analysis + process intelligence"
   }
 }

@@ -411,7 +411,29 @@ print(f"Prediction: {predictions}")
 - **CPU**: Inferencia consume CPU, optimizar batch size
 - **Actualizaciones**: Nuevos modelos pueden requerir nuevas features
 
+## 🔗 **Enlaces Relacionados**
+
+### Integración con el Sistema
+- **[📋 README Principal](../README.md)** - Navegación general del proyecto
+- **[🤖 ML Detector](../plugins/detectors/ml_detector/README.md)** - Plugin que usa estos modelos
+- **[🧠 Recursos Compartidos](../plugins/shared/README.md)** - Motor de inteligencia unificado
+- **[⚙️ Configuración ML](../config/README.md)** - Configuración de machine learning
+- **[📊 Core Engine](../core/README.md)** - Motor principal que coordina ML
+- **[🌐 Network Monitor](../plugins/monitors/network_monitor/README.md)** - Fuente de datos para modelos
+
+### Documentación Técnica
+- **[🔌 Sistema de Plugins](../plugins/README.md)** - Arquitectura de plugins ML
+- **[📝 Logs](../logs/README.md)** - Logging de predicciones ML
+- **[🛠️ Utils](../utils/README.md)** - Utilidades para procesamiento ML
+
+### Archivos de Configuración
+- **`label_classes.json`** - Mapeo de clases de salida
+- **`onnx_metadata_*.json`** - Metadatos de modelos ONNX
+- **[ml_config.json](../config/ml_config.json)** - Configuración de ML en config/
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../README.md) - Detección Inteligente con Machine Learning**
 
 **Versión del modelo**: 1.0  
 **Última actualización**: Septiembre 2025  

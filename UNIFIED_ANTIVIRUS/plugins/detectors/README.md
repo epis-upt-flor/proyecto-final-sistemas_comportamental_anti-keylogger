@@ -761,7 +761,29 @@ threats = plugin.analyze_process_behavior(suspicious_process_data)
 - **Performance impact**: Balancear detección vs recursos del sistema
 - **False positives**: Validar detecciones antes de acciones drásticas
 
+## 🔗 **Enlaces a Detectores Específicos**
+
+### Detectores Principales
+- **[🎯 Behavior Detector](behavior_detector/README.md)** - Detección heurística de comportamiento
+- **[⌨️ Keylogger Detector](keylogger_detector/README.md)** - Detector especializado de keyloggers  
+- **[🤖 ML Detector](ml_detector/README.md)** - Detección con machine learning
+- **[🌐 Network Detector](network_detector/README.md)** - Análisis de tráfico de red
+- **[🛡️ IAST Detector](iast_detector/README.md)** - Auto-protección y detección IAST
+- **[🤖 Detectores Generados](generated/README.md)** - Detectores auto-generados
+
+### Enlaces Relacionados
+- **[📋 README Principal](../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../README.md)** - Arquitectura de plugins
+- **[🧠 Recursos Compartidos](../shared/README.md)** - Motor de inteligencia unificado
+- **[📊 Monitores](../monitors/README.md)** - Sistema de monitoreo
+- **[🚨 Handlers](../handlers/README.md)** - Gestores de respuesta
+- **[⚙️ Configuración](../../config/README.md)** - Sistema de configuración
+- **[🤖 Modelos ML](../../models/README.md)** - Modelos y metadatos
+- **[📊 Core Engine](../../core/README.md)** - Motor principal del sistema
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../README.md) - Sistema de Detección Multi-Capa Profesional**
 
 **Versión**: 2.0.0  
 **Última actualización**: Noviembre 2025

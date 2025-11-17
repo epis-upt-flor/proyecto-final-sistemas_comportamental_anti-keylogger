@@ -1,3 +1,5 @@
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 2025-10-15 13:00:28,363 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\proyecto-Anti-keylogger\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
 2025-10-15 13:00:28,489 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\proyecto-Anti-keylogger\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
 2025-10-15 13:00:28,489 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\proyecto-Anti-keylogger\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
@@ -115,3 +117,62 @@
 2025-10-27 12:21:37,056 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
 2025-10-27 12:21:52,681 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
 2025-10-27 12:22:25,972 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-10 16:09:52,716 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-10 16:26:21,504 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-10 16:26:56,076 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-10 16:27:33,485 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-10 16:28:06,892 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-10 16:30:25,807 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-10 16:30:59,291 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-10 20:17:34,631 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\HP\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-10 20:18:14,348 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-10 20:46:52,488 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\HP\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-10 20:47:31,470 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+=======
+=======
+>>>>>>> Stashed changes
+2025-11-12 14:24:01,439 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-12 14:24:35,309 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-12 14:50:00,935 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-12 14:50:37,235 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-12 15:17:04,301 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-12 15:17:37,530 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+2025-11-13 20:25:43,097 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\HP\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-13 20:26:25,461 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-13 20:27:46,583 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\HP\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-13 20:28:26,492 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 17:01:46,029 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 17:02:19,794 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 17:50:18,677 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 17:50:54,135 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:03:50,372 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:04:25,243 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:14:03,026 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:14:36,949 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:22:11,365 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:22:45,889 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:25:09,254 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:25:43,819 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:25:46,880 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:26:20,529 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:27:09,049 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:27:42,778 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:31:59,622 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:32:34,241 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:34:36,891 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:35:12,069 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:35:46,764 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:36:23,862 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:36:57,424 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:42:22,384 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:42:57,572 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:45:32,551 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:46:06,899 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:50:03,724 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:50:38,040 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente
+2025-11-16 18:54:31,502 - plugin.ml_detector - INFO - 📄 Configuración cargada desde C:\Users\windows10\Documents\GitHub\ANTIVIRUS_CPP_PROFESSIONAL\UNIFIED_ANTIVIRUS\plugins\detectors\ml_detector\config.json
+2025-11-16 18:55:05,288 - plugin.ml_detector - INFO - ✅ Plugin 'ml_detector' activado exitosamente

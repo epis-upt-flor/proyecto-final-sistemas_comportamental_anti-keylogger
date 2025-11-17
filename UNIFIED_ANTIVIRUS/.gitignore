@@ -1,0 +1,104 @@
+# Antivirus Professional - .gitignore
+# ===================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Logs (preservar estructura pero ignorar contenido específico)
+logs/*.log
+logs/*.jsonl
+*.log
+*.log.*
+
+# Desarrollo local
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Archivos temporales del sistema
+*.tmp
+*.temp
+*.bak
+*.backup
+*_backup.*
+
+# Archivos de configuración local
+config/local_*.json
+config/*_local.*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Datos sensibles
+threat_intel/custom_*.txt
+config/api_keys.json
+config/secrets.json
+
+# Archivos de desarrollo específicos (opcional)
+dev/temp/
+dev/experiments/
+dev/sandbox/
+
+# Modelos ML grandes (track solo versiones específicas)
+models/*.bin
+models/*_temp.*
+models/experimental_*
+
+# Cache de Dear PyGui
+.dpg_cache/
+
+# Reportes temporales y análisis
+threat_report_*.json
+analysis_*.json
+performance_*.json
+
+# Archivos de Windows
+desktop.ini
+*.lnk
+
+# Archivos específicos del proyecto que pueden ser regenerados
+generated_*.py
+temp_*.py
+test_output_*

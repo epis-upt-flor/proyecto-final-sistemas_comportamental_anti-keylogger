@@ -446,7 +446,26 @@ assert quarantine_handler.is_quarantined(quarantine_id)
 quarantine_handler.restore_file(quarantine_id)
 ```
 
+## 🔗 **Enlaces a Handlers Específicos**
+
+### Handlers Principales
+- **[🚨 Alert Manager](alert_manager/README.md)** - Gestión de alertas y notificaciones
+- **[🔒 Quarantine Handler](quarantine_handler/README.md)** - Sistema de cuarentena de archivos
+- **[📝 Logger Handler](logger_handler/README.md)** - Logging estructurado de eventos
+
+### Enlaces Relacionados
+- **[📋 README Principal](../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../README.md)** - Arquitectura de plugins
+- **[🔍 Detectores](../detectors/README.md)** - Sistema de detección
+- **[👁️ Monitores](../monitors/README.md)** - Sistema de monitoreo
+- **[🧠 Recursos Compartidos](../shared/README.md)** - Motor de inteligencia unificado
+- **[📊 Core Engine](../../core/README.md)** - Event Bus y motor principal
+- **[⚙️ Configuración](../../config/README.md)** - Sistema de configuración
+- **[📝 Logs](../../logs/README.md)** - Sistema de logging central
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../README.md) - Sistema de Respuesta Automatizada**
 
 **Versión**: 2.0.0  
 **Última actualización**: Noviembre 2025

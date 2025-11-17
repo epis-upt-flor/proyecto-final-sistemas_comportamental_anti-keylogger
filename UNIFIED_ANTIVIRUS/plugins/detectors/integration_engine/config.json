@@ -1,0 +1,33 @@
+{
+    "plugin_name": "integration_engine",
+    "version": "1.0.0",
+    "enabled": true,
+    "category": "detectors",
+    "description": "Integración TDD, IAST y MDSD en tiempo real",
+    
+    "tdd_config": {
+        "enabled": true,
+        "test_interval": 60,
+        "test_modules": [
+            "tests/tdd_01_api_hooking_detection",
+            "tests/tdd_02_port_detection"
+        ]
+    },
+    
+    "iast_config": {
+        "enabled": true,
+        "scan_interval": 45,
+        "vulnerability_checks": true
+    },
+    
+    "mdsd_config": {
+        "enabled": true,
+        "generation_interval": 120,
+        "auto_templates": true
+    },
+    
+    "logging": {
+        "level": "INFO",
+        "separate_logs": true
+    }
+}

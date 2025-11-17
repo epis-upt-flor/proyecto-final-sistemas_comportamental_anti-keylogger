@@ -273,12 +273,18 @@ class PluginManager:
             True si todos se desactivaron correctamente
         """
         try:
+            self.logger.info("🔥 INICIANDO SHUTDOWN_ALL_PLUGINS")
             active_names = list(self.active_plugins.keys())
+            self.logger.info(f"🔥 Plugins activos a desactivar: {active_names}")
             deactivated = 0
 
             for name in active_names:
+                self.logger.info(f"🔥 Desactivando plugin: {name}")
                 if self.deactivate_plugin(name):
                     deactivated += 1
+                    self.logger.info(f"✅ Plugin {name} desactivado correctamente")
+                else:
+                    self.logger.error(f"❌ Falló desactivación de plugin {name}")
 
             success = deactivated == len(active_names)
             self.logger.info(f"🛑 Shutdown: {deactivated}/{len(active_names)} plugins")
@@ -286,6 +292,43 @@ class PluginManager:
 
         except Exception as e:
             self.logger.error(f"❌ Error en shutdown: {e}")
+            return False
+
+    def force_shutdown(self) -> bool:
+        """
+        Fuerza la terminación de todos los plugins y sus threads.
+        
+        Returns:
+            True si la terminación forzada fue exitosa
+        """
+        try:
+            self.logger.info("🔥 Iniciando terminación forzada de plugins...")
+            
+            # Terminar todos los threads de plugins de forma agresiva
+            threads_terminated = 0
+            for plugin_name, thread in list(self.plugin_threads.items()):
+                if thread and thread.is_alive():
+                    self.logger.info(f"🔥 Terminando thread de {plugin_name}...")
+                    try:
+                        # Dar 1 segundo para terminar gracefully
+                        thread.join(timeout=1.0)
+                        if thread.is_alive():
+                            # Si sigue vivo, marcar como daemon para que termine con el proceso principal
+                            thread.daemon = True
+                            self.logger.warning(f"⚠️ Thread de {plugin_name} marcado como daemon")
+                        threads_terminated += 1
+                    except Exception as e:
+                        self.logger.error(f"❌ Error terminando thread de {plugin_name}: {e}")
+            
+            # Limpiar todas las referencias
+            self.active_plugins.clear()
+            self.plugin_threads.clear()
+            
+            self.logger.info(f"🔥 Terminación forzada completada: {threads_terminated} threads procesados")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"❌ Error en terminación forzada: {e}")
             return False
 
     # =================== EVENT BUS INTEGRATION ===================

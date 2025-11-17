@@ -145,3 +145,19 @@ python plugin.py --test-synthetic
 - Validar `metadata.json` del modelo
 - Comprobar formato de datos de red de entrada
 - Usar `feature_extractor.py` standalone para debug
+
+## 🔗 **Enlaces Relacionados**
+
+- **[📋 README Principal](../../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../../README.md)** - Arquitectura de plugins
+- **[🧠 Recursos Compartidos](../../shared/README.md)** - Motor de inteligencia unificado
+- **[🤖 Modelos ML](../../../models/README.md)** - Modelos y metadatos ONNX
+- **[🎯 Behavior Detector](../behavior_detector/README.md)** - Detector de comportamiento
+- **[⌨️ Keylogger Detector](../keylogger_detector/README.md)** - Detector especializado
+- **[🌐 Network Detector](../network_detector/README.md)** - Detector de red
+- **[⚙️ Configuración ML](../../../config/README.md)** - Configuración de machine learning
+- **[📊 Core Engine](../../../core/README.md)** - Motor principal del sistema
+
+---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../../README.md) - Sistema de Detección con IA Avanzada**

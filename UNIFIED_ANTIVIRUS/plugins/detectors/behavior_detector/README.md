@@ -188,3 +188,18 @@ python plugin.py --test-processes
 - Limitar análisis a procesos críticos
 - Usar whitelist para filtrar procesos conocidos
 - Ajustar frecuencia de análisis
+
+## 🔗 **Enlaces Relacionados**
+
+- **[📋 README Principal](../../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../../README.md)** - Arquitectura de plugins
+- **[🧠 Recursos Compartidos](../../shared/README.md)** - Motor de inteligencia unificado
+- **[🤖 ML Detector](../ml_detector/README.md)** - Detector de machine learning
+- **[🌐 Network Detector](../network_detector/README.md)** - Detector de red
+- **[⌨️ Keylogger Detector](../keylogger_detector/README.md)** - Detector especializado
+- **[⚙️ Configuración](../../../config/README.md)** - Configuración del sistema
+- **[📊 Core Engine](../../../core/README.md)** - Motor principal
+
+---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../../README.md) - Sistema de Detección Profesional**

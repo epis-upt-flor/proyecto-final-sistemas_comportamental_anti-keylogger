@@ -193,3 +193,20 @@ python plugin.py --simulate-exfiltration
 - Verificar feeds de threat intelligence actualizados
 - Revisar umbrales de detección muy altos
 - Comprobar que eventos de red llegan correctamente
+
+## 🔗 **Enlaces Relacionados**
+
+- **[📋 README Principal](../../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../../README.md)** - Arquitectura de plugins
+- **[🧠 Recursos Compartidos](../../shared/README.md)** - Motor de inteligencia unificado
+- **[🌐 Monitor de Red](../../monitors/network_monitor/README.md)** - Monitor de tráfico de red
+- **[🎯 Behavior Detector](../behavior_detector/README.md)** - Detector de comportamiento
+- **[🤖 ML Detector](../ml_detector/README.md)** - Detector con machine learning
+- **[⌨️ Keylogger Detector](../keylogger_detector/README.md)** - Detector especializado
+- **[🛡️ Threat Intelligence](../../../threat_intel/README.md)** - Inteligencia de amenazas
+- **[⚙️ Configuración](../../../config/README.md)** - Sistema de configuración
+- **[📊 Core Engine](../../../core/README.md)** - Motor principal del sistema
+
+---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../../README.md) - Sistema de Detección de Red Avanzada**

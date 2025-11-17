@@ -11,17 +11,15 @@ from .plugin_manager import PluginManager
 from .plugin_registry import PluginRegistry, register_plugin
 from .base_plugin import BasePlugin, PluginInterface
 from .event_bus import EventBus, Event, event_bus, subscribe_to
-from .memory_monitor import MemoryMonitor
-from .consensus_engine import ConsensusEngine
 from .interfaces import (
     DetectorInterface,
-    MonitorInterface,
+    MonitorInterface, 
     InterfacePluginInterface,
     HandlerInterface,
     ConfigurableInterface,
     PluginHealthInterface,
     ThreatInfo,
-    SystemData,
+    SystemData
 )
 
 # Versión del sistema
@@ -31,29 +29,30 @@ __author__ = "Anti-Keylogger Team"
 # Exportaciones principales
 __all__ = [
     # Core classes
-    "UnifiedAntivirusEngine",
-    "PluginManager",
-    "PluginRegistry",
-    "BasePlugin",
-    "EventBus",
-    "Event",
-    # Advanced Components (TDD #7, #8)
-    "MemoryMonitor",
-    "ConsensusEngine",
+    'UnifiedAntivirusEngine',
+    'PluginManager', 
+    'PluginRegistry',
+    'BasePlugin',
+    'EventBus',
+    'Event',
+    
     # Interfaces
-    "DetectorInterface",
-    "MonitorInterface",
-    "InterfacePluginInterface",
-    "HandlerInterface",
-    "ConfigurableInterface",
-    "PluginInterface",
-    "PluginHealthInterface",
+    'DetectorInterface',
+    'MonitorInterface',
+    'InterfacePluginInterface', 
+    'HandlerInterface',
+    'ConfigurableInterface',
+    'PluginInterface',
+    'PluginHealthInterface',
+    
     # Utilities
-    "ThreatInfo",
-    "SystemData",
+    'ThreatInfo',
+    'SystemData',
+    
     # Singletons
-    "event_bus",
+    'event_bus',
+    
     # Decorators
-    "register_plugin",
-    "subscribe_to",
+    'register_plugin',
+    'subscribe_to'
 ]

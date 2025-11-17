@@ -490,7 +490,26 @@ monitor.stop_monitoring()
 - **Privacy**: Respetar privacidad del usuario
 - **Storage**: Historial de eventos puede crecer
 
+## 🔗 **Enlaces a Monitores Específicos**
+
+### Monitores Principales
+- **[🖥️ Process Monitor](process_monitor/README.md)** - Monitoreo de procesos en tiempo real
+- **[📁 File Monitor](file_monitor/README.md)** - Vigilancia del sistema de archivos
+- **[🌐 Network Monitor](network_monitor/README.md)** - Monitoreo de tráfico de red
+
+### Enlaces Relacionados
+- **[📋 README Principal](../../README.md)** - Navegación general del proyecto
+- **[🔌 Sistema de Plugins](../README.md)** - Arquitectura de plugins
+- **[🔍 Detectores](../detectors/README.md)** - Sistema de detección
+- **[🚨 Handlers](../handlers/README.md)** - Gestores de respuesta
+- **[🧠 Recursos Compartidos](../shared/README.md)** - Motor de inteligencia unificado
+- **[⚙️ Configuración](../../config/README.md)** - Sistema de configuración
+- **[📊 Core Engine](../../core/README.md)** - Motor principal y Event Bus
+- **[📝 Logs](../../logs/README.md)** - Sistema de logging
+
 ---
+
+**Desarrollado como parte del [UNIFIED_ANTIVIRUS](../../README.md) - Sistema de Monitoreo Continuo**
 
 **Versión**: 2.0.0  
 **Última actualización**: Noviembre 2025
