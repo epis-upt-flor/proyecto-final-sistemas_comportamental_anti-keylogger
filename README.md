@@ -1,4 +1,4 @@
-# 🛡️ Sistema Anti-Keylogger Unificado - ÍNDICE CENTRAL DE DOCUMENTACIÓN
+# 🛡️ GECAD Framework de analisis
 
 ## 📚 Navegador de Documentación
 
