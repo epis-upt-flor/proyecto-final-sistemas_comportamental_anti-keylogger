@@ -10,7 +10,6 @@ import subprocess
 class RealtimeMonitorComponent:
     """
     Componente para monitorizar y gestionar amenazas en tiempo real.
-    Renombrado a: Registro de TTPs en Vivo.
     """
     
     def __init__(self, parent_tag: str, app_controller):
@@ -35,24 +34,16 @@ class RealtimeMonitorComponent:
 
     def render(self):
         """Crear la vista del monitor en tiempo real."""
-        # Verificar que el parent tag existe
-        if not dpg.does_item_exist(self.parent_tag):
-            return
-        
-        # Crear contenido en el parent tag correcto
-        with dpg.group(parent=self.parent_tag):
-            self._create_header()
-            self._create_detections_table()
-            
+        self._create_header()
+        self._create_detections_table()
         self.start_updates()
 
     def _create_header(self):
         """Crear el header con controles."""
         with dpg.group(horizontal=True):
-            # TÍTULO RENOMBRADO: Registro de TTPs en Vivo
-            dpg.add_text("📝 Live TTPs Log", color=(255, 80, 80))
+            dpg.add_text("🔴 Real-time System Monitor", color=(255, 80, 80))
             dpg.add_spacer(width=50)
-            dpg.add_checkbox(label="Auto-Isolation", tag=self.ui_tags['auto_quarantine_checkbox'], callback=self._toggle_auto_quarantine)
+            dpg.add_checkbox(label="Auto-quarantine", tag=self.ui_tags['auto_quarantine_checkbox'], callback=self._toggle_auto_quarantine)
         
         with dpg.group(horizontal=True):
             dpg.add_text("Update Frequency:")
@@ -68,12 +59,11 @@ class RealtimeMonitorComponent:
             with dpg.table(header_row=True, resizable=True, policy=dpg.mvTable_SizingStretchProp,
                            borders_outerH=True, borders_innerV=True, borders_innerH=True, borders_outerV=True,
                            tag=self.ui_tags['detections_table']):
-                # COLUMNAS ACTUALIZADAS
                 dpg.add_table_column(label="Timestamp", width_fixed=True, init_width_or_weight=100)
-                dpg.add_table_column(label="TTP Type", width_fixed=True, init_width_or_weight=120) # Antes Type
-                dpg.add_table_column(label="Process/PID", width_stretch=True, init_width_or_weight=250) # Antes Process/File
-                dpg.add_table_column(label="Risk (Consensus)", width_fixed=True, init_width_or_weight=120) # Antes Risk
-                dpg.add_table_column(label="Forensic Actions", width_fixed=True, init_width_or_weight=480) # Antes Actions
+                dpg.add_table_column(label="Type", width_fixed=True, init_width_or_weight=100)
+                dpg.add_table_column(label="Process/File", width_stretch=True, init_width_or_weight=250)
+                dpg.add_table_column(label="Risk", width_fixed=True, init_width_or_weight=80)
+                dpg.add_table_column(label="Actions", width_fixed=True, init_width_or_weight=420)
 
     def start_updates(self):
         """Iniciar el hilo de actualización de la tabla."""
@@ -94,15 +84,13 @@ class RealtimeMonitorComponent:
         """Bucle que actualiza la tabla de detecciones periódicamente."""
         while self.is_updating:
             try:
-                if dpg.does_item_exist(self.ui_tags['update_status']):
-                    dpg.set_value(self.ui_tags['update_status'], "Updating...")
-                    dpg.configure_item(self.ui_tags['update_status'], color=(255, 255, 0))
+                dpg.set_value(self.ui_tags['update_status'], "Updating...")
+                dpg.configure_item(self.ui_tags['update_status'], color=(255, 255, 0))
                 
                 self._update_detections_list()
                 
-                if dpg.does_item_exist(self.ui_tags['update_status']):
-                    dpg.set_value(self.ui_tags['update_status'], "Active")
-                    dpg.configure_item(self.ui_tags['update_status'], color=(0, 255, 0))
+                dpg.set_value(self.ui_tags['update_status'], "Active")
+                dpg.configure_item(self.ui_tags['update_status'], color=(0, 255, 0))
                 
                 time.sleep(self.update_interval)
             except Exception as e:
@@ -130,25 +118,20 @@ class RealtimeMonitorComponent:
             with dpg.table_row(parent=self.ui_tags['detections_table']):
                 dpg.add_text(threat.get('timestamp', 'N/A'))
                 dpg.add_text(threat.get('type', 'N/A'))
-                
-                # Formato Process/PID
-                pid = threat.get('pid', 'N/A')
-                name = threat.get('name', 'N/A')
-                dpg.add_text(f"{name} ({pid})")
+                dpg.add_text(threat.get('path', threat.get('name', 'N/A')))
                 
                 risk = threat.get('risk', 'LOW')
-                score = threat.get('score', 0.0)
                 color = (0, 255, 0)
                 if risk == 'HIGH': color = (255, 0, 0)
                 elif risk == 'MEDIUM': color = (255, 165, 0)
-                dpg.add_text(f"{risk} ({score:.2f})", color=color)
+                dpg.add_text(risk, color=color)
 
                 with dpg.group(horizontal=True):
-                    # BOTONES REINTERPRETADOS
-                    dpg.add_button(label="⚖️ Weighting", small=True, user_data=threat, callback=self._show_consensus_details)
-                    dpg.add_button(label="🛑 End Test", small=True, user_data=threat, callback=self._stop_process) # Antes Stop
-                    dpg.add_button(label="🔒 Isolate", small=True, user_data=threat, callback=self._quarantine_file) # Antes Quarantine
-                    dpg.add_button(label="📍 Locate", small=True, user_data=threat, callback=self._locate_file)
+                    dpg.add_button(label="Details", small=True, user_data=threat, callback=self._show_details)
+                    dpg.add_button(label="Locate", small=True, user_data=threat, callback=self._locate_file)
+                    dpg.add_button(label="Stop", small=True, user_data=threat, callback=self._stop_process)
+                    dpg.add_button(label="Quarantine", small=True, user_data=threat, callback=self._quarantine_file)
+                    dpg.add_button(label="Whitelist", small=True, user_data=threat, callback=self._whitelist_item)
 
     # --- Callbacks de la Interfaz ---
 
@@ -168,13 +151,31 @@ class RealtimeMonitorComponent:
         self.app_controller.set_setting('auto_quarantine', enabled)
         self.logger.info(f"Auto-quarantine {'enabled' if enabled else 'disabled'}")
 
-    def _show_consensus_details(self, sender, app_data, user_data):
-        """Muestra la vista de detalle de ponderación (Consensus Viewer)."""
-        # Navegar a la vista de consenso en el controlador principal
-        if hasattr(self.app_controller, 'show_consensus_view'):
-            self.app_controller.show_consensus_view(user_data)
-        else:
-            self.logger.warning("Consensus view navigation not implemented in app controller")
+    def _show_details(self, sender, app_data, user_data):
+        """Muestra una ventana modal con detalles de la amenaza."""
+        # Cerrar cualquier modal existente primero
+        if dpg.does_item_exist("threat_details_modal"):
+            dpg.delete_item("threat_details_modal")
+            
+        with dpg.window(
+            label="Threat Details", 
+            modal=True, 
+            show=True, 
+            tag="threat_details_modal", 
+            width=400, 
+            height=300,
+            on_close=self._close_threat_details_modal
+        ):
+            dpg.add_text(f"Process/File: {user_data.get('name', 'N/A')}")
+            dpg.add_text(f"Path: {user_data.get('path', 'N/A')}")
+            dpg.add_text(f"PID: {user_data.get('pid', 'N/A')}")
+            dpg.add_text(f"Risk: {user_data.get('risk', 'N/A')}")
+            dpg.add_text(f"Type: {user_data.get('type', 'N/A')}")
+            dpg.add_separator()
+            dpg.add_text("Details:", color=(255, 255, 0))
+            dpg.add_text(str(user_data.get('details', 'No additional details available.')), wrap=380)
+            dpg.add_separator()
+            dpg.add_button(label="Close", width=-1, callback=self._close_threat_details_modal)
 
     def _locate_file(self, sender, app_data, user_data):
         """Abre el explorador de archivos en la ubicación del archivo."""
@@ -194,51 +195,53 @@ class RealtimeMonitorComponent:
         pid = user_data.get('pid')
         if pid:
             self.logger.info(f"Requesting to stop process with PID: {pid}")
-            
-            # Feedback visual inmediato
-            if dpg.does_item_exist(self.ui_tags['update_status']):
-                dpg.set_value(self.ui_tags['update_status'], "Stopping...")
-                dpg.configure_item(self.ui_tags['update_status'], color=(255, 200, 0))
-
+            # Esta función debe existir en el app_controller y comunicarse con el backend
             success, message = self.app_controller.perform_backend_action('stop_process', {'pid': pid})
-            
             if success:
                 self.logger.info(f"Backend confirmed process {pid} stopped.")
-                if dpg.does_item_exist(self.ui_tags['update_status']):
-                    dpg.set_value(self.ui_tags['update_status'], "Stopped")
-                    dpg.configure_item(self.ui_tags['update_status'], color=(0, 255, 0))
             else:
                 self.logger.error(f"Backend failed to stop process {pid}: {message}")
-                if dpg.does_item_exist(self.ui_tags['update_status']):
-                    dpg.set_value(self.ui_tags['update_status'], "Failed")
-                    dpg.configure_item(self.ui_tags['update_status'], color=(255, 0, 0))
         else:
             self.logger.warning("Cannot stop process. PID not available.")
 
     def _quarantine_file(self, sender, app_data, user_data):
         """Solicita al backend que ponga en cuarentena un archivo."""
         path = user_data.get('path')
-        pid = user_data.get('pid')
-        
-        if pid or path:
-            self.logger.info(f"Requesting to quarantine: PID={pid}, Path={path}")
-            
-            # Feedback visual inmediato
-            if dpg.does_item_exist(self.ui_tags['update_status']):
-                dpg.set_value(self.ui_tags['update_status'], "Isolating...")
-                dpg.configure_item(self.ui_tags['update_status'], color=(255, 200, 0))
-
-            success, message = self.app_controller.perform_backend_action('quarantine_file', {'pid': pid, 'path': path})
-            
+        if path:
+            self.logger.info(f"Requesting to quarantine file: {path}")
+            # Esta función debe existir en el app_controller
+            success, message = self.app_controller.perform_backend_action('quarantine_file', {'path': path})
             if success:
-                self.logger.info(f"Backend confirmed quarantine successful.")
-                if dpg.does_item_exist(self.ui_tags['update_status']):
-                    dpg.set_value(self.ui_tags['update_status'], "Isolated")
-                    dpg.configure_item(self.ui_tags['update_status'], color=(0, 255, 0))
+                self.logger.info(f"Backend confirmed file quarantined: {path}")
             else:
-                self.logger.error(f"Backend failed to quarantine: {message}")
-                if dpg.does_item_exist(self.ui_tags['update_status']):
-                    dpg.set_value(self.ui_tags['update_status'], "Failed")
-                    dpg.configure_item(self.ui_tags['update_status'], color=(255, 0, 0))
+                self.logger.error(f"Backend failed to quarantine file {path}: {message}")
         else:
-            self.logger.warning("Cannot quarantine. No PID or Path available.")
+            self.logger.warning("Cannot quarantine. Path not available.")
+
+    def _whitelist_item(self, sender, app_data, user_data):
+        """Solicita al backend que agregue un item a la lista blanca."""
+        identifier = user_data.get('path') or user_data.get('name')
+        if identifier:
+            self.logger.info(f"Requesting to whitelist item: {identifier}")
+            # Esta función debe existir en el app_controller
+            success, message = self.app_controller.perform_backend_action('whitelist_item', {'identifier': identifier})
+            if success:
+                self.logger.info(f"Backend confirmed item whitelisted: {identifier}")
+            else:
+                self.logger.error(f"Backend failed to whitelist item {identifier}: {message}")
+        else:
+            self.logger.warning("Cannot whitelist. Identifier not available.")
+
+    def _close_threat_details_modal(self, sender=None, app_data=None):
+        """Cierra correctamente el modal de detalles de amenaza."""
+        try:
+            if dpg.does_item_exist("threat_details_modal"):
+                dpg.delete_item("threat_details_modal")
+                self.logger.debug("Threat details modal closed successfully")
+        except Exception as e:
+            self.logger.error(f"Error closing threat details modal: {e}")
+            # Forzar limpieza en caso de error
+            try:
+                dpg.delete_item("threat_details_modal")
+            except:
+                pass

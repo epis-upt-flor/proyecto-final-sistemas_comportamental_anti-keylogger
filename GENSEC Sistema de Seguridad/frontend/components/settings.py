@@ -58,27 +58,33 @@ class SettingsComponent:
 
     def render(self):
         """Crear la vista de configuración mejorada y dinámica."""
-        dpg.add_text("⚙️ Configuración del Sistema", color=(100, 200, 255))
-        dpg.add_separator()
-        
-        # Barra de estado general del sistema
-        self._create_system_status_bar()
-        dpg.add_spacer(height=15)
-
-        with dpg.group(horizontal=True):
-            # Panel principal de configuraciones (redimensionado)
-            with dpg.child_window(width=650, height=-1, border=True):
-                self._create_protection_settings()
-                dpg.add_spacer(height=15)
-                self._create_performance_settings()
-                dpg.add_spacer(height=15)
-                self._create_update_settings()
-                dpg.add_spacer(height=15)
-                self._create_advanced_settings()
+        # Verificar que el parent tag existe
+        if not dpg.does_item_exist(self.parent_tag):
+            return
+        
+        # Crear contenido en el parent tag correcto
+        with dpg.group(parent=self.parent_tag):
+            dpg.add_text("⚙️ Configuración del Sistema", color=(100, 200, 255))
+            dpg.add_separator()
             
-            # Panel de información mejorado
-            with dpg.child_window(width=-1, height=-1, border=True):
-                self._create_dynamic_info_panel()
+            # Barra de estado general del sistema
+            self._create_system_status_bar()
+            dpg.add_spacer(height=15)
+    
+            with dpg.group(horizontal=True):
+                # Panel principal de configuraciones (redimensionado)
+                with dpg.child_window(width=650, height=-1, border=True):
+                    self._create_protection_settings()
+                    dpg.add_spacer(height=15)
+                    self._create_performance_settings()
+                    dpg.add_spacer(height=15)
+                    self._create_update_settings()
+                    dpg.add_spacer(height=15)
+                    self._create_advanced_settings()
+                
+                # Panel de información mejorado
+                with dpg.child_window(width=-1, height=-1, border=True):
+                    self._create_dynamic_info_panel()
 
     def _create_protection_settings(self):
         """Crear grupo de configuraciones de protección mejoradas."""

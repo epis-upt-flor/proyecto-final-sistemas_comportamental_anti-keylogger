@@ -1,9 +1,9 @@
 """
-Componente Dashboard Principal - Sandbox Control Panel
-====================================================
+Componente Dashboard Principal
+============================
 
-Panel de control principal para la supervisión de la Sandbox de análisis de malware.
-Muestra métricas operacionales, estado de los monitores y uso de recursos de la sandbox.
+Dashboard principal con métricas en tiempo real, gráficos de rendimiento
+y resumen del estado del sistema antivirus.
 """
 
 import dearpygui.dearpygui as dpg
@@ -16,12 +16,14 @@ import logging
 
 class DashboardComponent:
     """
-    Componente del panel de control de la Sandbox.
+    Componente del dashboard principal
     
     Muestra:
-    - Métricas de la Sandbox (Alertas Activas, Monitores Operacionales, CPU)
-    - Gráficos de rendimiento de la Sandbox
-    - Estado de la investigación
+    - Métricas clave del sistema
+    - Gráficos de rendimiento en tiempo real
+    - Estado de protección
+    - Resumen de amenazas
+    - Estadísticas de red y procesos
     """
     
     def __init__(self, parent_tag: str):
@@ -72,11 +74,6 @@ class DashboardComponent:
     def create(self):
         """Crear el dashboard completo responsivo"""
         try:
-            # Verificar que el parent tag existe
-            if not dpg.does_item_exist(self.parent_tag):
-                self.logger.error(f"{self.parent_tag} does not exist")
-                return
-            
             # Usar dimensiones por defecto que se ajustarán automáticamente
             viewport_width = 1200  # Ancho por defecto
             viewport_height = 800  # Alto por defecto
@@ -91,28 +88,25 @@ class DashboardComponent:
             except:
                 pass  # Usar valores por defecto si no están disponibles
             
-            # Crear grupo contenedor principal en el parent tag correcto
-            with dpg.group(parent=self.parent_tag):
-                self._create_header()
-                self._create_metrics_row(viewport_width)
-                dpg.add_spacer(height=15)
-                self._create_charts_section(viewport_width, viewport_height)
-                dpg.add_spacer(height=15)
-                self._create_suspicious_processes_list(viewport_width)
+            self._create_header()
+            self._create_metrics_row(viewport_width)
+            dpg.add_spacer(height=15)
+            self._create_charts_section(viewport_width, viewport_height)
+            dpg.add_spacer(height=15)
+            self._create_suspicious_processes_list(viewport_width)
                 
             self.logger.info("Dashboard created successfully")
             
         except Exception as e:
-            self.logger.error(f"Error creating dashboard: {e}", exc_info=True)
+            self.logger.error(f"Error creating dashboard: {e}")
             
     def _create_header(self):
         """Crear header del dashboard"""
         with dpg.group(horizontal=True):
-            # TÍTULO RENOMBRADO: Panel de Control de la Sandbox
-            dpg.add_text("📊 Sandbox Control Panel", color=(0, 150, 255))
+            dpg.add_text("📊 System Dashboard", color=(0, 150, 255))
             dpg.add_spacer(width=50)
             with dpg.group():
-                dpg.add_text("Last Update: ", color=(150, 150, 150))
+                dpg.add_text("Last Updated: ", color=(150, 150, 150))
                 dpg.add_text("Never", tag="dashboard_last_update", color=(200, 200, 200))
             
         dpg.add_separator()
@@ -123,10 +117,10 @@ class DashboardComponent:
         metric_width = (viewport_width - 100) // 5  # 5 métricas con espaciado
         
         with dpg.group(horizontal=True):
-            # Métrica 1: Monitores Operacionales (antes Protection Status)
+            # Métricas en cards responsivas
             self._create_metric_card(
-                "👁️ Monitors Operational",
-                "3/3 Active", # Simulado por ahora, idealmente dinámico
+                "🛡️ Protection Status",
+                "Active",
                 (0, 255, 100),
                 self.ui_tags['protection_status'],
                 metric_width
@@ -134,9 +128,8 @@ class DashboardComponent:
             
             dpg.add_spacer(width=15)
             
-            # Métrica 2: Alertas Activas (antes Threats Detected)
             self._create_metric_card(
-                "🚨 Active Alerts",
+                "🦠 Threats Detected",
                 "0",
                 (255, 100, 100),
                 self.ui_tags['threats_count'],
@@ -145,9 +138,8 @@ class DashboardComponent:
             
             dpg.add_spacer(width=15)
             
-            # Métrica 3: Sandbox CPU (antes CPU Usage)
             self._create_metric_card(
-                "⚡ Sandbox CPU",
+                "💻 CPU Usage",
                 "0%",
                 (100, 150, 255),
                 self.ui_tags['cpu_metric'],
@@ -156,9 +148,8 @@ class DashboardComponent:
             
             dpg.add_spacer(width=15)
             
-            # Métrica 4: Sandbox RAM (antes Memory Usage)
             self._create_metric_card(
-                "💾 Sandbox RAM",
+                "🧠 Memory Usage",
                 "0%",
                 (255, 150, 100),
                 self.ui_tags['memory_metric'],
@@ -167,9 +158,8 @@ class DashboardComponent:
             
             dpg.add_spacer(width=15)
             
-            # Métrica 5: Procesos Analizados (antes Processes)
             self._create_metric_card(
-                "🔍 Analyzed Procs",
+                "📊 Processes",
                 "0",
                 (150, 255, 150),
                 self.ui_tags['processes_metric'],
@@ -178,9 +168,8 @@ class DashboardComponent:
             
             dpg.add_spacer(width=20)
             
-            # Métrica 6: Tiempo de Prueba (antes Uptime)
             self._create_metric_card(
-                "⏱️ Test Duration",
+                "⏱️ Uptime",
                 "0s",
                 (100, 255, 200),
                 self.ui_tags['uptime_metric']
@@ -199,7 +188,7 @@ class DashboardComponent:
                 
     def _create_charts_section(self, viewport_width, viewport_height):
         """Crear sección de gráficos de rendimiento responsiva"""
-        dpg.add_text("📈 Real-time Sandbox Telemetry", color=(0, 200, 100))
+        dpg.add_text("📈 Real-time Performance", color=(0, 200, 100))
         dpg.add_separator()
         
         # Calcular dimensiones responsivas
@@ -212,17 +201,17 @@ class DashboardComponent:
         with dpg.group(horizontal=True):
             # Gráfico de CPU
             with dpg.child_window(width=chart_width, height=chart_height, border=True):
-                dpg.add_text("💻 Sandbox CPU Load (%)", color=(100, 150, 255))
+                dpg.add_text("💻 CPU Usage (%)", color=(100, 150, 255))
                 
                 with dpg.plot(width=plot_width, height=plot_height, tag=self.ui_tags['cpu_plot']):
                     dpg.add_plot_legend()
                     dpg.add_plot_axis(dpg.mvXAxis, label="Time")
-                    dpg.add_plot_axis(dpg.mvYAxis, label="Load %", tag="cpu_y_axis")
+                    dpg.add_plot_axis(dpg.mvYAxis, label="CPU %", tag="cpu_y_axis")
                     
                     # Línea de CPU
                     dpg.add_line_series(
                         [], [], 
-                        label="CPU Load",
+                        label="CPU Usage",
                         parent="cpu_y_axis",
                         tag="cpu_line_series"
                     )
@@ -231,7 +220,7 @@ class DashboardComponent:
             
             # Gráfico de Memoria
             with dpg.child_window(width=chart_width, height=chart_height, border=True):
-                dpg.add_text("🧠 Sandbox Memory Usage (%)", color=(255, 150, 100))
+                dpg.add_text("🧠 Memory Usage (%)", color=(255, 150, 100))
                 
                 with dpg.plot(width=plot_width, height=plot_height, tag=self.ui_tags['memory_plot']):
                     dpg.add_plot_legend()
@@ -252,17 +241,17 @@ class DashboardComponent:
         with dpg.group(horizontal=True):
             # Gráfico de Amenazas
             with dpg.child_window(width=chart_width, height=chart_height, border=True):
-                dpg.add_text("🦠 Anomalies Detected", color=(255, 100, 100))
+                dpg.add_text("🦠 Threats Detected", color=(255, 100, 100))
                 
                 with dpg.plot(width=plot_width, height=plot_height, tag=self.ui_tags['threats_plot']):
                     dpg.add_plot_legend()
                     dpg.add_plot_axis(dpg.mvXAxis, label="Time")
-                    dpg.add_plot_axis(dpg.mvYAxis, label="Anomalies", tag="threats_y_axis")
+                    dpg.add_plot_axis(dpg.mvYAxis, label="Threats", tag="threats_y_axis")
                     
                     # Línea de Amenazas
                     dpg.add_line_series(
                         [], [], 
-                        label="Anomalies",
+                        label="Threats",
                         parent="threats_y_axis",
                         tag="threats_line_series"
                     )
@@ -271,7 +260,7 @@ class DashboardComponent:
             
             # Gráfico de Red
             with dpg.child_window(width=chart_width, height=chart_height, border=True):
-                dpg.add_text("🌐 Network I/O", color=(200, 100, 255))
+                dpg.add_text("🌐 Network Activity", color=(200, 100, 255))
                 
                 with dpg.plot(width=plot_width, height=plot_height, tag=self.ui_tags['network_plot']):
                     dpg.add_plot_legend()
@@ -288,7 +277,7 @@ class DashboardComponent:
                     
     def _create_suspicious_processes_list(self, viewport_width):
         """Crear tabla responsiva para procesos sospechosos"""
-        dpg.add_text("🚨 Flagged Processes (Quick View)", color=(255, 100, 100))
+        dpg.add_text("🚨 Suspicious Processes", color=(255, 100, 100))
         dpg.add_separator()
         
         # Calcular altura disponible para la tabla
@@ -300,8 +289,8 @@ class DashboardComponent:
                            tag="suspicious_processes_table"):
                 dpg.add_table_column(label="Timestamp")
                 dpg.add_table_column(label="Process/File")
-                dpg.add_table_column(label="TTP Type")
-                dpg.add_table_column(label="Risk Score")
+                dpg.add_table_column(label="Type")
+                dpg.add_table_column(label="Risk")
                 dpg.add_table_column(label="Actions")
 
     def start_updates(self, app_controller):
@@ -367,9 +356,6 @@ class DashboardComponent:
                 dpg.set_value(self.ui_tags['uptime_metric'], self._format_uptime(uptime))
                 dpg.set_value(self.ui_tags['threats_count'], str(threats_detected))
                 dpg.set_value("dashboard_last_update", time.strftime("%H:%M:%S"))
-                
-                # Actualizar estado de monitores (simulado)
-                dpg.set_value(self.ui_tags['protection_status'], "3/3 Active")
 
         except Exception as e:
             self.logger.error(f"Error updating metrics: {e}")

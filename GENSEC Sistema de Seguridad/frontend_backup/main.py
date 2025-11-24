@@ -19,8 +19,6 @@ import time
 import sys
 import os
 import json
-import shutil
-import psutil
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 
@@ -225,76 +223,27 @@ class AntivirusProfessionalUI:
         self.real_log_reader = None
         self.logger.info("✅ Sistema de métricas simplificado inicializado")
         
-        # Sistema de datos funcional - usar procesos reales si están disponibles
-        import psutil
-        
-        # Obtener algunos procesos reales para testing
-        real_processes = []
-        try:
-            for proc in psutil.process_iter(['pid', 'name', 'exe']):
-                try:
-                    proc_info = proc.info
-                    if proc_info['exe'] and proc_info['name']:  # Solo procesos con path válido
-                        real_processes.append({
-                            'pid': proc_info['pid'],
-                            'name': proc_info['name'],
-                            'path': proc_info['exe']
-                        })
-                        if len(real_processes) >= 2:  # Solo necesitamos 2 para testing
-                            break
-                except (psutil.NoSuchProcess, psutil.AccessDenied):
-                    continue
-        except Exception as e:
-            self.logger.warning(f"Error getting real processes for testing: {e}")
-        
-        # Usar procesos reales si están disponibles, sino fallback a datos mock
-        if len(real_processes) >= 2:
-            self.active_threats = [
-                {
-                    'timestamp': '20:42:15',
-                    'type': 'Keylogger',
-                    'name': real_processes[0]['name'],
-                    'path': real_processes[0]['path'],
-                    'pid': real_processes[0]['pid'],
-                    'risk': 'HIGH',
-                    'score': 0.85,
-                    'details': 'Suspicious keyboard monitoring detected'
-                },
-                {
-                    'timestamp': '20:42:10',
-                    'type': 'Behavior',
-                    'name': real_processes[1]['name'],
-                    'path': real_processes[1]['path'],
-                    'pid': real_processes[1]['pid'],
-                    'risk': 'MEDIUM',
-                    'score': 0.60,
-                    'details': 'High CPU usage detected'
-                }
-            ]
-        else:
-            # Fallback to safer mock data
-            self.active_threats = [
-                {
-                    'timestamp': '20:42:15',
-                    'type': 'Keylogger',
-                    'name': 'test_process.exe',
-                    'path': str(Path(__file__).resolve()),  # Use this script's path as it definitely exists
-                    'pid': os.getpid(),  # Use current process PID
-                    'risk': 'HIGH',
-                    'score': 0.85,
-                    'details': 'Test threat for demonstration'
-                },
-                {
-                    'timestamp': '20:42:10',
-                    'type': 'Behavior',
-                    'name': 'demo_process.exe',
-                    'path': str(Path(__file__).resolve()),
-                    'pid': os.getpid() + 1000,  # Fake PID that likely doesn't exist
-                    'risk': 'MEDIUM',
-                    'score': 0.60,
-                    'details': 'Demo threat for testing'
-                }
-            ]
+        # Sistema de datos funcional
+        self.active_threats = [
+            {
+                'timestamp': '20:42:15',
+                'type': 'Keylogger',
+                'name': 'Code.exe',
+                'path': 'C:\\Program Files\\Microsoft VS Code\\Code.exe',
+                'pid': 420,
+                'risk': 'HIGH',
+                'details': 'Suspicious keyboard monitoring detected'
+            },
+            {
+                'timestamp': '20:42:10',
+                'type': 'Behavior',
+                'name': 'python.exe',
+                'path': 'C:\\Python\\python.exe',
+                'pid': 1234,
+                'risk': 'MEDIUM',
+                'details': 'High CPU usage detected'
+            }
+        ]
         self.quarantine_items = []
         self.whitelist_items = [
             "python.exe", "Code.exe", "chrome.exe", "explorer.exe", "System32\\*.dll"
@@ -431,7 +380,6 @@ class AntivirusProfessionalUI:
                             process.kill()  # Forzar si no responde
                         return True, f"Proceso {pid} terminado exitosamente"
                     except psutil.NoSuchProcess:
-                        self.logger.warning(f"Process {pid} not found - may have already terminated")
                         return False, f"Proceso {pid} no encontrado"
                     except psutil.AccessDenied:
                         return False, f"Acceso denegado para terminar proceso {pid}"
@@ -443,16 +391,12 @@ class AntivirusProfessionalUI:
                 if not path:
                     return False, "Ruta de archivo no proporcionada"
                 
-                # Validar que el archivo existe antes de intentar cuarentena
-                if not os.path.exists(path):
-                    return False, f"Archivo no existe: {path}"
-                
                 # Intentar usar el handler de cuarentena del engine
                 if self.engine and hasattr(self.engine, 'plugin_manager'):
                     try:
                         # Buscar el plugin de cuarentena
                         quarantine_plugin = None
-                        for plugin in self.engine.plugin_manager.active_plugins.values():
+                        for plugin in self.engine.plugin_manager.plugins.values():
                             if hasattr(plugin, 'quarantine_file'):
                                 quarantine_plugin = plugin
                                 break
@@ -521,7 +465,6 @@ class AntivirusProfessionalUI:
         try:
             source_path = Path(file_path)
             if not source_path.exists():
-                self.logger.error(f"Manual quarantine failed - file does not exist: {file_path}")
                 return False, f"Archivo no existe: {file_path}"
             
             # Crear directorio de cuarentena
@@ -671,9 +614,7 @@ class AntivirusProfessionalUI:
             
             # Aplicar fuente por defecto si se cargó
             if font_loaded:
-                with open(config_path, 'r') as f:
-                    loaded_settings = json.load(f)
-                    self.system_settings.update(loaded_settings)
+                dpg.bind_font("default_font")
             
         except Exception as e:
             self.logger.warning(f"⚠️ No se pudo cargar fuentes personalizadas: {e}")
@@ -993,48 +934,7 @@ class AntivirusProfessionalUI:
 
         # Actualizar la lista de amenazas si cambiamos a la vista de amenazas
         if view_name == "threat_viewer" and self.threat_viewer:
-            self.threat_viewer._update_threat_display()
-
-    def show_consensus_view(self, threat_data: dict):
-        """Show detailed consensus weighting information for a specific threat."""
-        self.logger.info(f"Showing consensus details for threat: {threat_data.get('name', 'Unknown')}")
-        
-        # For now, show a popup with consensus information
-        # In a full implementation, this could switch to a dedicated consensus view
-        if dpg.does_item_exist("consensus_popup"):
-            dpg.delete_item("consensus_popup")
-            
-        with dpg.window(label="Consensus Weighting Details", tag="consensus_popup", 
-                       width=600, height=400, modal=True):
-            dpg.add_text("⚖️ Threat Analysis Details", color=(255, 200, 0))
-            dpg.add_separator()
-            
-            # Show threat basic info
-            dpg.add_text(f"Process: {threat_data.get('name', 'N/A')}")
-            dpg.add_text(f"PID: {threat_data.get('pid', 'N/A')}")
-            dpg.add_text(f"Risk Level: {threat_data.get('risk', 'N/A')}")
-            dpg.add_text(f"Score: {threat_data.get('score', 0.0):.2f}")
-            
-            dpg.add_separator()
-            dpg.add_text("Detection Sources:", color=(100, 200, 255))
-            
-            # Mock consensus data - in real implementation, this would come from the engine
-            detections = [
-                {"detector": "Keylogger Detector", "score": 0.8, "weight": 0.3},
-                {"detector": "Behavior Analyzer", "score": 0.6, "weight": 0.4},
-                {"detector": "ML Model", "score": 0.7, "weight": 0.3}
-            ]
-            
-            for detection in detections:
-                weighted_score = detection["score"] * detection["weight"]
-                dpg.add_text(f"• {detection['detector']}: {detection['score']:.2f} (weight: {detection['weight']:.2f}) → {weighted_score:.2f}")
-            
-            final_score = sum(d["score"] * d["weight"] for d in detections)
-            dpg.add_separator()
-            dpg.add_text(f"Final Weighted Score: {final_score:.2f}", color=(255, 100, 100))
-            
-            dpg.add_separator()
-            dpg.add_button(label="Close", callback=lambda: dpg.delete_item("consensus_popup"))
+            self.threat_viewer._update_threat_list()
 
     def run(self):
         """Ejecutar la aplicación UI"""

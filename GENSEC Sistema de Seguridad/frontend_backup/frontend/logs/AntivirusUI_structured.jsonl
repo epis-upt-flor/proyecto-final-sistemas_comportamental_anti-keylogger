@@ -1,0 +1,67 @@
+{"timestamp": "2025-11-08T20:24:20.570581", "level": "INFO", "logger": "AntivirusUI", "message": "📝 Logger 'AntivirusUI' inicializado", "module": "logger", "function": "__init__", "line": 91}
+{"timestamp": "2025-11-08T20:24:20.571107", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Iniciando Antivirus Professional UI (Dear PyGui)", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:24:20.571482", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Starting Antivirus Professional UI...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:35:52.623829", "level": "INFO", "logger": "AntivirusUI", "message": "📝 Logger 'AntivirusUI' inicializado", "module": "logger", "function": "__init__", "line": 91}
+{"timestamp": "2025-11-08T20:35:52.624276", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Iniciando Antivirus Professional UI (Dear PyGui)", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:35:52.624632", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Starting Antivirus Professional UI...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:35:52.627952", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Interfaz creada correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:35:52.628390", "level": "INFO", "logger": "AntivirusUI", "message": "🛡️ Inicializando motor antivirus...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:35:52.823589", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Motor antivirus iniciado correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:35:52.824988", "level": "ERROR", "logger": "AntivirusUI", "message": "❌ Falló el inicio del sistema antivirus", "module": "logger", "function": "error", "line": 213}
+{"timestamp": "2025-11-08T20:35:58.690714", "level": "INFO", "logger": "AntivirusUI", "message": "🔍 Starting system scan...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:36:24.241747", "level": "INFO", "logger": "AntivirusUI", "message": "🛑 Shutting down application...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:36:24.244932", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Application shutdown complete", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:38.548579", "level": "INFO", "logger": "AntivirusUI", "message": "📝 Logger 'AntivirusUI' inicializado", "module": "logger", "function": "__init__", "line": 91}
+{"timestamp": "2025-11-08T20:38:38.549010", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Iniciando Antivirus Professional UI (Dear PyGui)", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:38.549399", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Starting Antivirus Professional UI...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:38.551290", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Interfaz creada correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:38.551680", "level": "INFO", "logger": "AntivirusUI", "message": "🛡️ Inicializando motor antivirus...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:38.729614", "level": "INFO", "logger": "AntivirusUI", "message": "🔄 Cambiando directorio de trabajo a: C:\\Users\\windows10\\Documents\\GitHub\\ANTIVIRUS_CPP_PROFESSIONAL\\UNIFIED_ANTIVIRUS", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:38.731775", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Motor antivirus iniciado correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:38:45.669252", "level": "INFO", "logger": "AntivirusUI", "message": "🔍 Starting system scan...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:42:00.833929", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: dashboard", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:42:02.822467", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: monitor", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:42:04.086160", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: threats", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:42:04.677481", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: settings", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:42:04.774448", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: logs", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:42:29.475616", "level": "INFO", "logger": "AntivirusUI", "message": "🛑 Shutting down application...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:25.423323", "level": "INFO", "logger": "AntivirusUI", "message": "📝 Logger 'AntivirusUI' inicializado", "module": "logger", "function": "__init__", "line": 91}
+{"timestamp": "2025-11-08T20:46:25.423899", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Iniciando Antivirus Professional UI (Dear PyGui)", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:25.424189", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Starting Antivirus Professional UI...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:25.425946", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Interfaz creada correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:25.426312", "level": "INFO", "logger": "AntivirusUI", "message": "🛡️ Inicializando motor antivirus...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:25.607364", "level": "INFO", "logger": "AntivirusUI", "message": "🔄 Cambiando directorio de trabajo a: C:\\Users\\windows10\\Documents\\GitHub\\ANTIVIRUS_CPP_PROFESSIONAL\\UNIFIED_ANTIVIRUS", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:25.608493", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Motor antivirus iniciado correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:26.747024", "level": "INFO", "logger": "AntivirusUI", "message": "🔍 Starting system scan...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:39.261365", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: dashboard", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:40.253358", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: monitor", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:41.077179", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: threats", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:42.561776", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: settings", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:43.794614", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: logs", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:46:45.432800", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: dashboard", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:47:46.002515", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: monitor", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:47:51.701308", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: threats", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:47:58.499639", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: settings", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:48:04.325984", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: logs", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T20:48:08.942268", "level": "INFO", "logger": "AntivirusUI", "message": "🛑 Shutting down application...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.782674", "level": "INFO", "logger": "AntivirusUI", "message": "📝 Logger 'AntivirusUI' inicializado", "module": "logger", "function": "__init__", "line": 91}
+{"timestamp": "2025-11-08T21:02:01.783048", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Iniciando Antivirus Professional UI (Dear PyGui)", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.783242", "level": "INFO", "logger": "AntivirusUI", "message": "🚀 Starting Antivirus Professional UI...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.784876", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Interfaz creada correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.785215", "level": "INFO", "logger": "AntivirusUI", "message": "🛡️ Inicializando motor antivirus...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.946401", "level": "INFO", "logger": "AntivirusUI", "message": "🔄 Cambiando directorio de trabajo a: C:\\Users\\windows10\\Documents\\GitHub\\ANTIVIRUS_CPP_PROFESSIONAL\\UNIFIED_ANTIVIRUS", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.947378", "level": "INFO", "logger": "AntivirusUI", "message": "🛡️ Backend completo inicializado - Protección total activa", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:02:01.947937", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Motor antivirus iniciado correctamente", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:02.900674", "level": "INFO", "logger": "AntivirusUI", "message": "🔍 Starting system scan...", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:11.943245", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: monitor", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:15.631069", "level": "INFO", "logger": "AntivirusUI", "message": "🔍 Real-time monitoring started", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:19.253183", "level": "INFO", "logger": "AntivirusUI", "message": "✅ Marked as safe: OLDCAAD.tmp", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:22.864889", "level": "INFO", "logger": "AntivirusUI", "message": "📁 Opening location for: OLDCAAD.tmp", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:25.189046", "level": "INFO", "logger": "AntivirusUI", "message": "🗂️ Quarantining: OLDCAAD.tmp", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:25.670438", "level": "INFO", "logger": "AntivirusUI", "message": "⚪ Added to whitelist: OLDCAAD.tmp", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:30.085563", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: threats", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:36.664033", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: settings", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:50.815601", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: settings", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:51.133246", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: logs", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:04:59.493051", "level": "INFO", "logger": "AntivirusUI", "message": "Switching to view: dashboard", "module": "logger", "function": "info", "line": 205}
+{"timestamp": "2025-11-08T21:05:21.273026", "level": "INFO", "logger": "AntivirusUI", "message": "🛑 Shutting down application...", "module": "logger", "function": "info", "line": 205}

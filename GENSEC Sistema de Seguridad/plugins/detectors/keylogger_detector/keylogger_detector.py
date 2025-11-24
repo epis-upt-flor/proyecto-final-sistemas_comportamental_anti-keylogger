@@ -335,15 +335,21 @@ class KeyloggerDetector(BasePlugin):
             logger.error(f"[KEYLOGGER_DETECTOR] ❌ Error al iniciar: {e}")
             return False
 
+    # WHITELIST (PRIORIDAD II): Procesos confiables del sistema para reducir falsos positivos
+    WHITELIST = {
+        "svchost.exe", "csrss.exe", "explorer.exe", "services.exe", 
+        "lsass.exe", "winlogon.exe", "smss.exe", "system", "registry"
+    }
+
     def analyze_process_for_keylogger(
         self, process_data: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """
         Analiza un proceso específico en busca de características de keylogger
-
+        
         Args:
             process_data: Información del proceso a analizar
-
+            
         Returns:
             Lista de amenazas detectadas
         """
@@ -351,7 +357,12 @@ class KeyloggerDetector(BasePlugin):
 
         try:
             pid = process_data.get("pid")
-            process_name = process_data.get("name", "unknown")
+            process_name = process_data.get("name", "unknown").lower()
+
+            # WHITELIST CHECK
+            if process_name in self.WHITELIST:
+                logger.debug(f"[KEYLOGGER_DETECTOR] Ignoring whitelisted process: {process_name}")
+                return threats
 
             if not pid:
                 return threats

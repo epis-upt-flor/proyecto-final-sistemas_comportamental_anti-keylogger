@@ -38,19 +38,13 @@ class LogsViewerComponent:
 
     def render(self):
         """Crear la vista del visualizador de logs."""
-        # Verificar que el parent tag existe
-        if not dpg.does_item_exist(self.parent_tag):
-            return
-
-        # Crear contenido en el parent tag correcto
-        with dpg.group(parent=self.parent_tag):
-            dpg.add_text("📜 System Logs Viewer", color=(100, 255, 100))
-            dpg.add_separator()
-            
-            self._create_controls()
-            
-            with dpg.child_window(tag="log_content_container", border=True):
-                dpg.add_text("Select a log file and an interpretation level.", tag=self.ui_tags['log_content_area'])
+        dpg.add_text("📜 System Logs Viewer", color=(100, 255, 100))
+        dpg.add_separator()
+        
+        self._create_controls()
+        
+        with dpg.child_window(tag="log_content_container", border=True):
+            dpg.add_text("Select a log file and an interpretation level.", tag=self.ui_tags['log_content_area'])
 
         self._find_log_files()
 

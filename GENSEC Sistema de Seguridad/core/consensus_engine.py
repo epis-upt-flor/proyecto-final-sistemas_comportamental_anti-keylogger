@@ -147,40 +147,6 @@ class ConsensusEngine:
         self.risk_levels = {
             "LOW": 1,
             "MEDIUM": 2, 
-            "HIGH": 3
-        }
-        self.level_names = {1: "LOW", 2: "MEDIUM", 3: "HIGH"}
-        
-        logger.info("ConsensusEngine inicializado con estrategias disponibles")
-    
-    def _get_default_weights(self) -> Dict[str, float]:
-        """Obtiene pesos por defecto para detectores"""
-        return {
-            "ml_detector": 0.3,
-            "behavior_detector": 0.25,
-            "network_detector": 0.25,
-            "api_detector": 0.2
-        }
-        
-    def combine_detectors(self, detector_results: Dict[str, Dict[str, Any]], 
-                         min_detectors: int = DEFAULT_MIN_DETECTORS,
-                         method: ConsensusMethod = ConsensusMethod.WEIGHTED) -> Dict[str, Any]:
-        """
-        Combina resultados de múltiples detectores usando estrategia especificada
-        
-        Args:
-            detector_results: Diccionario con resultados de cada detector
-            min_detectors: Número mínimo de detectores requeridos
-            method: Método de consenso a usar
-            
-        Returns:
-            Resultado del consenso con nivel de riesgo final
-        """
-        self._validate_inputs(detector_results, min_detectors)
-        
-        # Convertir datos de entrada a formato estructurado
-        structured_results = self._convert_to_structured_results(detector_results)
-        
         # Aplicar estrategia de consenso
         strategy = self._strategies.get(method)
         if not strategy:

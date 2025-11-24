@@ -26,10 +26,10 @@ if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
 from core.base_plugin import BasePlugin
-from core.interfaces import HandlerPluginInterface
+from core.interfaces import HandlerPluginInterface, HandlerInterface
 
 
-class LoggerHandlerPlugin(BasePlugin, HandlerPluginInterface):
+class LoggerHandlerPlugin(BasePlugin, HandlerPluginInterface, HandlerInterface):
     """Handler avanzado de logging para el sistema antivirus"""
 
     def __init__(self, config_path: str = None):
@@ -441,5 +441,107 @@ if __name__ == "__main__":
     logger_handler.log_event("performance", "INFO", "CPU: 45%")
     logger_handler.log_event("audit", "INFO", "Usuario realizó escaneo")
 
-    print(f"Estado: {logger_handler.get_handler_status()}")
-    print(f"Stats: {logger_handler.get_log_stats()}")
+    # =================== HANDLER INTERFACE IMPLEMENTATION ===================
+
+    def handle_threat(self, threat_data: Dict[str, Any]) -> bool:
+        """
+        Maneja una amenaza detectada generando un reporte forense.
+        Implementación de HandlerInterface.
+        """
+        try:
+            # Generar reporte forense
+            report = self.generate_forensic_report(threat_data)
+            
+            # Loguear el reporte
+            threat_type = threat_data.get("threat_type", "unknown")
+            self.log_event("threats", "WARNING", f"Threat Handled: {threat_type}", report)
+            
+            # También loguear en el log principal
+            self.logger.info(f"Threat handled and report generated for {threat_type}")
+            
+            return True
+        except Exception as e:
+            self.logger.error(f"Error handling threat: {e}")
+            return False
+
+    def can_handle_threat_type(self, threat_type: str) -> bool:
+        """
+        Verifica si puede manejar el tipo de amenaza.
+        El LoggerHandler puede manejar (loguear) cualquier tipo.
+        """
+        return True
+
+    def get_handler_priority(self) -> int:
+        """
+        Prioridad del manejador.
+        Alta prioridad (100) para asegurar que siempre se loguee.
+        """
+        return 100
+
+    def rollback_action(self, action_id: str) -> bool:
+        """
+        Revierte una acción.
+        Logging no se puede revertir (es append-only), pero retornamos True para cumplir contrato.
+        """
+        self.logger.info(f"Rollback requested for action {action_id} (Log is immutable)")
+        return True
+
+    # =================== FORENSIC REPORTING ===================
+
+    def generate_forensic_report(self, threat_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Genera un reporte forense estructurado para el investigador.
+        """
+        timestamp = datetime.now().isoformat()
+        threat_id = threat_data.get("threat_id", f"INC-{int(datetime.now().timestamp())}")
+        
+        # Calcular Risk Score normalizado (0-100)
+        raw_score = threat_data.get("risk_score", 0.0)
+        # Si viene de ML (probabilidad 0-1) o Keylogger (score 0-1+)
+        if raw_score <= 1.0:
+            risk_score = raw_score * 100
+        else:
+            risk_score = min(raw_score * 100, 100) # Cap at 100 if logic varies
+            
+        # Extraer heurísticas disparadas
+        heuristics = []
+        if "detection_reasons" in threat_data:
+            reasons = threat_data["detection_reasons"]
+            if isinstance(reasons, dict):
+                for reason, score in reasons.items():
+                    if score > 0:
+                        heuristics.append(f"{reason} (Score: {score:.2f})")
+            elif isinstance(reasons, list):
+                heuristics = reasons
+                
+        # ML Confidence
+        ml_confidence = "N/A"
+        if threat_data.get("source") == "ml_detector":
+            ml_confidence = f"{threat_data.get('confidence', 0.0):.2%}"
+        elif "ml_confidence" in threat_data:
+             ml_confidence = f"{threat_data['ml_confidence']:.2%}"
+
+        report = {
+            "report_type": "FORENSIC_ANALYSIS",
+            "incident_id": threat_id,
+            "timestamp": timestamp,
+            "severity": threat_data.get("severity", "UNKNOWN").upper(),
+            "risk_assessment": {
+                "risk_score": f"{risk_score:.1f}/100",
+                "confidence_level": ml_confidence,
+                "detector_source": threat_data.get("source", "unknown")
+            },
+            "threat_details": {
+                "type": threat_data.get("threat_type", "unknown"),
+                "process": threat_data.get("process_name", "unknown"),
+                "pid": threat_data.get("pid", "unknown"),
+            },
+            "forensic_evidence": {
+                "triggered_heuristics": heuristics,
+                "raw_data_snapshot": threat_data
+            },
+            "recommendation": threat_data.get("recommended_action", "Manual Investigation Required")
+        }
+        
+        return report
+
